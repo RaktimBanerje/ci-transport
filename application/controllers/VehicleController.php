@@ -74,8 +74,6 @@
                 return redirect(base_url());
             }
 
-
-
             $data = [
                 "registration_no" => trim($this->input->post("registration_no")),
                 "registration_copy" => null,
@@ -129,24 +127,26 @@
                 return redirect(base_url());
             }
 
-            // $id = trim($this->input->post("id"));
-            // $name = trim($this->input->post("name"));
-            // $address = trim($this->input->post("address"));
-            // $mobile_no = trim($this->input->post("mobile_no"));
-            // $gst_no = trim($this->input->post("gst_no"));
-            // $bank_ac_no = trim($this->input->post("bank_ac_no"));
-            // $bank_branch = trim($this->input->post("bank_branch"));
-            // $bank_ifsc = trim($this->input->post("bank_ifsc"));
-            
-            // $data = [
-            //     "name" => $name,
-            //     "address" => $address,
-            //     "mobile_no" => $mobile_no,
-            //     "gst_no" => $gst_no,
-            //     "bank_ac_no" => $bank_ac_no,
-            //     "bank_branch" => $bank_branch,
-            //     "bank_ifsc" => $bank_ifsc
-            // ];
+            $id = trim($this->input->post("id"));
+            $old_vehicle = $this->Vehicle->get($id);
+
+            $data = [
+                "registration_no" => trim($this->input->post("registration_no")),
+                "owner_name" => trim($this->input->post("owner_name")),
+                "owner_phone" => trim($this->input->post("owner_phone")),
+            ];
+
+            $registration_copy = $this->upload_file("storage/registrations", "registration_copy", time());
+            if($registration_copy["status"] == true) {
+                $data["registration_copy"] = $registration_copy['upload_data']['file_name'];
+                $this->delete_file("storage/registrations/".$old_vehicle["registration_copy"]);
+            }
+
+            $owner_pan = $this->upload_file("storage/pans", "owner_pan", time());
+            if($owner_pan["status"] == true) {
+                $data["owner_pan"] = $owner_pan['upload_data']['file_name'];
+                $this->delete_file("storage/pans/".$old_vehicle["owner_pan"]);
+            }
 
             $this->Vehicle->Update($id, $data);
 
@@ -160,7 +160,7 @@
                 return redirect(base_url());
             }          
             
-            $this->Vehicle->delete($id);
+            $this->Vehicle->delete($id, date("Y-m-d H:i", time()));
 
             $this->session->set_flashdata("success", "Record deleted");
             return redirect(base_url() . "vehicle");
@@ -202,11 +202,8 @@
         }
 
         protected function delete_file($file){
-            $path = 'storage/invoice';
-            $filename =  $path . "/" . $file;
-            
-            if (file_exists($filename)) {
-                unlink($filename);
+            if (file_exists($file)) {
+                unlink($file);
                 return true;
             } 
             else {

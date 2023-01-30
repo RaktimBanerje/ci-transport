@@ -4,7 +4,7 @@
     <!-- Page Heading -->
     <div class="row">
         <div class="col-md-6">
-            <h1 class="h3 mb-4 text-gray-800">Edit buyer</h1>
+            <h1 class="h3 mb-4 text-gray-800">Edit vehicle</h1>
         </div>
         <div class="col-md-6">
             <?php if ($this->session->flashdata("success")) { ?>
@@ -22,40 +22,44 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <form action="<?php echo base_url() ?>buyer/update" method="POST">
-                <div class="form-group">
-                    <label for="name">Buyer name: </label>
-                    <input id="name" name="name" type="text" class="form-control" value="<?php echo $buyer["name"] ?>" />
-                </div>
-                <div class="form-group">
-                    <label for="address">Address: </label>
-                    <textarea id="address" name="address" type="text" class="form-control"><?php echo $buyer["address"] ?></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="mobile_no">Mobile No: </label>
-                    <input id="mobile_no" name="mobile_no" type="text" class="form-control" value="<?php echo $buyer["mobile_no"] ?>" />
-                </div>
-                <div class="form-group">
-                    <label for="gst_no">GST No: </label>
-                    <input id="gst_no" name="gst_no" type="text" class="form-control" value="<?php echo $buyer["gst_no"] ?>" />
-                </div>
-                <div class="form-group">
-                    <label for="bank_ac_no">Bank A/c No: </label>
-                    <input id="bank_ac_no" name="bank_ac_no" type="text" class="form-control" value="<?php echo $buyer["bank_ac_no"] ?>" />
-                </div>
-                <div class="form-group">
-                    <label for="bank_branch">Branch: </label>
-                    <input id="bank_branch" name="bank_branch" type="text" class="form-control" value="<?php echo $buyer["bank_branch"] ?>" />
-                </div>
-                <div class="form-group">
-                    <label for="bank_ifsc">IFSC Code: </label>
-                    <input id="bank_ifsc" name="bank_ifsc" type="text" class="form-control" value="<?php echo $buyer["bank_ifsc"] ?>" />
-                </div>
-                <div class="form-group">
-                    <input type="text" class="d-none" name="id" value="<?php echo $buyer["id"] ?>" />
-                    <input type="submit" value="Save" class="btn btn-primary" />
+    <div class="card card-flush">
+        <div class="card-body">
+            <form action="<?php echo base_url() ?>vehicle/update" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">Vehicle Registration No: </label>
+                            <input id="registration_no" name="registration_no" type="text" class="form-control" value="<?php echo $vehicle["registration_no"] ?>" />
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Registration Copy: 
+                                <?php if($vehicle["registration_copy"]) { ?>
+                                    <a target="_blank" class="ml-2 text-dark" href="<?php echo base_url() . "storage/registrations/" . $vehicle["registration_copy"]?>"><i class="fa fa-eye"></i></a>  
+                                <?php } ?>
+                            </label>
+                            <input id="registration_copy" name="registration_copy" type="file" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile_no">Owner Name:</label>
+                            <input id="owner_name" name="owner_name" type="text" class="form-control" value="<?php echo $vehicle["owner_name"] ?>"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="gst_no">Owner Phone: </label>
+                            <input id="owner_phone" name="owner_phone" type="text" class="form-control" value="<?php echo $vehicle["owner_phone"] ?>"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="bank_ac_no">Owner Pan Card: 
+                                <?php if($vehicle["owner_pan"]) { ?>
+                                    <a target="_blank" class="ml-2 text-dark" href="<?php echo base_url() . "storage/pans/" . $vehicle["owner_pan"]?>"><i class="fa fa-eye"></i></a>  
+                                <?php } ?>
+                            </label>
+                            <input id="owner_pan" name="owner_pan" type="file" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="d-none" name="id" value="<?php echo $vehicle["id"] ?>" />
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>

@@ -57,10 +57,15 @@
 <!-- Custom scripts for all pages-->
 <script src="<?php echo base_url() ?>assets/js/sb-admin-2.min.js"></script>
 <script src="<?php echo base_url() ?>assets/js/table2csv.js"></script>
+<script src="https://jquery.resizableColumns.js"></script>
+<script src="libs/store.js"></script>
 
 <script>
 	$(document).ready(function () {
     	$('table').wrap('<div class="table-responsive"></div>')
+        $('th').css("color", "black")
+        $('td').css("color", "black")
+        $("table").resizableColumns();
     })
 
     $(document).on("click", ".pagination li a", function(event) {
@@ -69,7 +74,7 @@
         loadData(limit, page)
     })
 
-    $(document).on("click", "#limit", function(event) {
+    $(document).on("change", "#limit", function(event) {
         const limit = $("#limit").val()
         let currentPage = window.location.pathname.split("/").pop()
         if(Number(currentPage))

@@ -21,8 +21,8 @@
             return $this->db->where(["id" => $id, "deleted" => 0])->update($this->table, $data);
         }
 
-        public function delete($id) {
-            return $this->db->where("id", $id)->update($this->table, ["deleted" => 1]);
+        public function delete($id, $deleted_at) {
+            return $this->db->where("id", $id)->update($this->table, ["deleted" => 1, "deleted_at" => $deleted_at]);
         }
 
         public function restore($id) {
