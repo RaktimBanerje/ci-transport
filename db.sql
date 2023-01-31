@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 31, 2023 at 01:21 AM
+-- Generation Time: Jan 31, 2023 at 01:33 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -58,6 +58,25 @@ INSERT INTO `brokers` (`id`, `name`, `phone_no`, `address`, `pan`, `bank_name`, 
 (9, 'Kerry Horne', '+1 (401) 327-1645', 'Gay Pitts', 'Doloribus voluptas e', 'Sara Bryant', 'Architecto culpa qu', 'Illum cupiditate id', 'Lawrence Morton', 0, NULL),
 (10, 'Griffin Francis', '+1 (199) 761-3683', 'Dillon Blake', 'Et ex consectetur a', 'Uma Santana', 'Id mollit nulla sed', 'Aliquam nihil unde e', 'Uma Hopper', 0, NULL),
 (11, 'Sean Boone', '+1 (393) 791-7831', 'Brynne Poole', 'Vel est rerum quam q', 'Jorden Waters', 'Aut recusandae Non', 'Excepturi eius odit', 'Desirae Black', 0, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clints`
+--
+
+CREATE TABLE `clints` (
+  `id` int(11) NOT NULL,
+  `name` text DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `pin_no` text DEFAULT NULL,
+  `req_no` text DEFAULT NULL,
+  `purchase_order_no` text DEFAULT NULL,
+  `purchase_order_date` date DEFAULT NULL,
+  `gst_no` text DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT 0,
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -119,6 +138,12 @@ ALTER TABLE `brokers`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `clints`
+--
+ALTER TABLE `clints`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -140,6 +165,12 @@ ALTER TABLE `vehicles`
 --
 ALTER TABLE `brokers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `clints`
+--
+ALTER TABLE `clints`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
