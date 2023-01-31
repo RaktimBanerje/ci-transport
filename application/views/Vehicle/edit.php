@@ -4,7 +4,7 @@
     <!-- Page Heading -->
     <div class="row">
         <div class="col-md-6">
-            <h1 class="h3 mb-4 text-gray-800">Edit vehicle</h1>
+            <h1 class="h3 mb-4 text-gray-800">Edit Vehicle</h1>
         </div>
         <div class="col-md-6">
             <?php if ($this->session->flashdata("success")) { ?>

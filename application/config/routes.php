@@ -70,3 +70,15 @@ $route["vehicle/update"]["POST"] = "VehicleController/update";
 $route["vehicle/delete/(:any)"]["GET"] = "VehicleController/delete/$1";
 $route["vehicle/restore/(:any)"]["GET"] = "VehicleController/restore/$1";
 
+
+// Broker Routes
+$route["broker(/:num)?(/:num)?"]["GET"] = "BrokerController/index";
+$route["broker/paginate(/:any)(/:num)"]["GET"] = "BrokerController/paginate";
+$route["broker/create"]["GET"] = "BrokerController/create";
+$route["broker/store"]["POST"] = "BrokerController/store";
+$route["broker/show/(:any)"]["GET"] = "BrokerController/show/$1";
+$route["broker/edit/(:any)"]["GET"] = "BrokerController/edit/$1";
+$route["broker/update"]["POST"] = "BrokerController/update";
+$route["broker/delete/(:any)"]["GET"] = "BrokerController/delete/$1";
+$route["broker/restore/(:any)"]["GET"] = "BrokerController/restore/$1";
+

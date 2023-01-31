@@ -26,10 +26,24 @@
                 <i class="fas fa-fw fa-cog"></i>
                 <span>Vehicle</span>
             </a>
-            <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="<?php echo base_url() ?>vehicle/create">Create Vehicle</a>
                     <a class="collapse-item" href="<?php echo base_url() ?>vehicle">Vehicle List</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Broker</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="<?php echo base_url() ?>broker/create">Create Broker</a>
+                    <a class="collapse-item" href="<?php echo base_url() ?>broker">Broker List</a>
                 </div>
             </div>
         </li>

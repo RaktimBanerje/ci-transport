@@ -65,6 +65,7 @@
     	$('table').wrap('<div class="table-responsive"></div>')
         $('th').css("color", "black")
         $('td').css("color", "black")
+        $('label').css("color", "black")
         $("table").resizableColumns();
     })
 
