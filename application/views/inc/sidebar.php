@@ -62,6 +62,20 @@
             </div>
         </li>
 
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Materials</span>
+            </a>
+            <div id="collapseFour" class="collapse" aria-labelledby="collapseFour" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="<?php echo base_url() ?>material/create">Create Material</a>
+                    <a class="collapse-item" href="<?php echo base_url() ?>material">Material List</a>
+                </div>
+            </div>
+        </li>
+
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 
