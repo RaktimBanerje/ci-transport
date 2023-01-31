@@ -1,12 +1,12 @@
 <?php 
     defined('BASEPATH') OR exit('No direct script access allowed');
 
-    class ClintController extends CI_Controller {
+    class ClientController extends CI_Controller {
         public function __construct() {
             parent::__construct();
 
             $this->config->load('pagination', TRUE);
-            $this->load->model("Broker");
+            $this->load->model("Client");
         }
 
         public function index() {
@@ -15,8 +15,8 @@
             }
 
             $pagination = $this->config->item('pagination');
-            $pagination["base_url"] = base_url().'broker';
-            $pagination["total_rows"] = count($this->Broker->get());
+            $pagination["base_url"] = base_url().'client';
+            $pagination["total_rows"] = count($this->Client->get());
             $pagination["per_page"] = $this->uri->segment(2)? $this->uri->segment(2) : 10;
             $this->pagination->initialize($pagination);
 
@@ -25,12 +25,12 @@
 
             $data = array(
                 'pagination_link'  => $this->pagination->create_links(),
-                'brokers'   => $this->Broker->get(NULL, $pagination["per_page"], $start),
+                'clients'   => $this->Client->get(NULL, $pagination["per_page"], $start),
                 'limit' => $pagination["per_page"],
             );
 
             $this->load->view("inc/header");
-            $this->load->view("Broker/index", $data);
+            $this->load->view("Client/index", $data);
             $this->load->view("inc/footer");
         }
 
@@ -40,9 +40,9 @@
             }
 
             $pagination = $this->config->item('pagination');
-            $pagination["base_url"] = base_url().'broker';
+            $pagination["base_url"] = base_url().'client';
             $pagination["uri_segment"] = 4;
-            $pagination["total_rows"] = count($this->Broker->get());
+            $pagination["total_rows"] = count($this->Client->get());
             $pagination["per_page"] = $this->uri->segment(3)? (int)$this->uri->segment(3) : 10;
             $this->pagination->initialize($pagination);
 
@@ -51,7 +51,7 @@
 
             $data = array(
                 'pagination_link'  => $this->pagination->create_links(),
-                'brokers'   => $this->Broker->get(NULL, $pagination["per_page"], $start),
+                'clients'   => $this->Client->get(NULL, $pagination["per_page"], $start),
             );
 
             header("content-type: application/json");
@@ -65,7 +65,7 @@
             }
 
             $this->load->view("inc/header");
-            $this->load->view("Broker/create");
+            $this->load->view("Client/create");
             $this->load->view("inc/footer");
         }
 
@@ -76,20 +76,19 @@
 
             $data = [
                 "name" => trim($this->input->post("name")),
-                "phone_no" => trim($this->input->post("phone_no")),
                 "address" => trim($this->input->post("address")),
-                "pan" => trim($this->input->post("pan")),
-                "bank_name" => trim($this->input->post("bank_name")),
-                "bank_account_no" => trim($this->input->post("bank_account_no")),
-                "bank_ifsc" => trim($this->input->post("bank_ifsc")),
-                "bank_branch_name" => trim($this->input->post("bank_branch_name")),
+                "pin_no" => trim($this->input->post("pin_no")),
+                "req_no" => trim($this->input->post("req_no")),
+                "purchase_order_no" => trim($this->input->post("purchase_order_no")),
+                "purchase_order_date" => trim($this->input->post("purchase_order_date")),
+                "gst_no" => trim($this->input->post("gst_no")),
             ];
 
 
-            $this->Broker->insert($data);
+            $this->Client->insert($data);
 
             $this->session->set_flashdata("success", "New record inserted");;
-            return redirect(base_url() . "broker/create");
+            return redirect(base_url() . "client/create");
         }
 
         public function show($id) {
@@ -99,9 +98,9 @@
         
             header("content-type: application/json");
 
-            $broker = $this->Broker->get($id);
+            $client = $this->Client->get($id);
 
-            echo json_encode($broker);
+            echo json_encode($client);
         }
 
         public function edit($id) {
@@ -109,10 +108,10 @@
                 return redirect(base_url());
             }
 
-            $broker = $this->Broker->get($id);
+            $client = $this->Client->get($id);
 
             $this->load->view("inc/header");
-            $this->load->view("Broker/edit", ["broker" => $broker]);
+            $this->load->view("Client/edit", ["client" => $client]);
             $this->load->view("inc/footer");
         }
 
@@ -125,19 +124,18 @@
             
             $data = [
                 "name" => trim($this->input->post("name")),
-                "phone_no" => trim($this->input->post("phone_no")),
                 "address" => trim($this->input->post("address")),
-                "pan" => trim($this->input->post("pan")),
-                "bank_name" => trim($this->input->post("bank_name")),
-                "bank_account_no" => trim($this->input->post("bank_account_no")),
-                "bank_ifsc" => trim($this->input->post("bank_ifsc")),
-                "bank_branch_name" => trim($this->input->post("bank_branch_name")),
+                "pin_no" => trim($this->input->post("pin_no")),
+                "req_no" => trim($this->input->post("req_no")),
+                "purchase_order_no" => trim($this->input->post("purchase_order_no")),
+                "purchase_order_date" => trim($this->input->post("purchase_order_date")),
+                "gst_no" => trim($this->input->post("gst_no")),
             ];
 
-            $this->Broker->Update($id, $data);
+            $this->Client->Update($id, $data);
 
             $this->session->set_flashdata("success", "Record updated");
-            return redirect(base_url() . "broker");
+            return redirect(base_url() . "client");
             
         }
 
@@ -146,21 +144,21 @@
                 return redirect(base_url());
             }          
             
-            $this->Broker->delete($id, date("Y-m-d H:i", time()));
+            $this->Client->delete($id, date("Y-m-d H:i", time()));
 
             $this->session->set_flashdata("success", "Record deleted");
-            return redirect(base_url() . "broker");
+            return redirect(base_url() . "client");
         }
 
         public function restore($id) {
             if(!$this->session->user) {
-                return redirect(base_url() . "broker");
+                return redirect(base_url() . "client");
             }          
             
-            $this->Broker->restore($id);
+            $this->Client->restore($id);
 
             $this->session->set_flashdata("success", "Record restored");;
-            return redirect(base_url() . "broker");
+            return redirect(base_url() . "client");
         }
 
         protected function upload_file($path, $file, $new_file_name){

@@ -82,3 +82,14 @@ $route["broker/update"]["POST"] = "BrokerController/update";
 $route["broker/delete/(:any)"]["GET"] = "BrokerController/delete/$1";
 $route["broker/restore/(:any)"]["GET"] = "BrokerController/restore/$1";
 
+// Client Routes
+$route["client(/:num)?(/:num)?"]["GET"] = "ClientController/index";
+$route["client/paginate(/:any)(/:num)"]["GET"] = "ClientController/paginate";
+$route["client/create"]["GET"] = "ClientController/create";
+$route["client/store"]["POST"] = "ClientController/store";
+$route["client/show/(:any)"]["GET"] = "ClientController/show/$1";
+$route["client/edit/(:any)"]["GET"] = "ClientController/edit/$1";
+$route["client/update"]["POST"] = "ClientController/update";
+$route["client/delete/(:any)"]["GET"] = "ClientController/delete/$1";
+$route["client/restore/(:any)"]["GET"] = "ClientController/restore/$1";
+
