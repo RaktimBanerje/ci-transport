@@ -4,7 +4,7 @@
     <!-- Page Heading -->
     <div class="row">
         <div class="col-md-6">
-            <h1 class="h3 mb-4 text-gray-800">Create Broker</h1>
+            <h1 class="h3 mb-4 text-gray-800">Create Material</h1>
         </div>
         <div class="col-md-6">
             <?php if ($this->session->flashdata("success")) { ?>
@@ -24,62 +24,52 @@
 
     <div class="card card-flush">
         <div class="card-body">
-            <form action="<?php echo base_url() ?>broker/store" method="POST" enctype="multipart/form-data">
+            <form action="<?php echo base_url() ?>material/store" method="POST" enctype="multipart/form-data">
                 <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="name">Broker Name: </label>
-                                <input id="name" name="name" type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="address">Broker Phone No.: </label>
-                                <input id="phone_no" name="phone_no" type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="name">Broker Address: </label>
-                                <input id="address" name="address" type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="address">Broker PAN Card: </label>
-                                <input id="pan" name="pan" type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="name">Broker Bank Name: </label>
-                                <input id="bank_name" name="bank_name" type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="address">Bank Account No: </label>
-                                <input id="bank_account_no" name="bank_account_no" type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="name">Bank IFS Code: </label>
-                                <input id="bank_ifsc" name="bank_ifsc" type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="address">Branch Name: </label>
-                                <input id="bank_branch_name" name="bank_branch_name" type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="submit" value="Save" class="btn btn-primary" />
-                            </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">Material Name: </label>
+                            <input id="name" name="name" type="text" class="form-control" />
                         </div>
                     </div>
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">Broker: </label>
+                            <select name="broker_id" type="text" class="form-control">
+                                <option value="">Please Select</option>
+                                <?php foreach($brokers as $broker) { ?>
+                                    <option value="<?php echo $broker['id'] ?>"><?php echo $broker['name'] ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="address">Rate for Broker: </label>
+                            <input id="broker_rate" name="broker_rate" type="number" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">Client: </label>
+                            <select name="client_id" type="text" class="form-control">
+                                <option value="">Please Select</option>
+                                <?php foreach($clients as $client) { ?>
+                                    <option value="<?php echo $client['id'] ?>"><?php echo $client['name'] ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="address">Rate for Client: </label>
+                            <input id="client_rate" name="client_rate" type="number" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
                 </div>
             </form>
         </div>

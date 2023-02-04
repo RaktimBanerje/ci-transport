@@ -1,27 +1,25 @@
 <?php
     defined('BASEPATH') OR exit('No direct script access allowed');
 
-    class Material extends CI_Model {
-        private $table = "materials";
+    class Place extends CI_Model {
+        private $table = "places";
 
         public function get($id = NULL, $limit = NULL, $start = 0) {
             if($id) {
                 return $this->db
-                            ->select('materials.*, brokers.name as broker_name, clients.name as client_name')
+                            ->select("places.*, clients.name as client_name")
                             ->from($this->table)
-                            ->join("brokers", "materials.broker_id = brokers.id")
-                            ->join("clients", "materials.client_id = clients.id")
-                            ->where(["materials.id" => $id, "materials.deleted" => 0])
+                            ->join("clients", "clients.id = places.client_id")
+                            ->where(["places.id" => $id, "places.deleted" => 0])
                             ->get()
                             ->row_array();
             }
             else {
                 return $this->db
-                            ->select('materials.*, brokers.name as broker_name, clients.name as client_name')
+                            ->select("places.*, clients.name as client_name")
                             ->from($this->table)
-                            ->join("brokers", "materials.broker_id = brokers.id")
-                            ->join("clients", "materials.client_id = clients.id")
-                            ->where("materials.deleted", 0)
+                            ->join("clients", "clients.id = places.client_id")
+                            ->where("places.deleted", 0)
                             ->limit($limit, $start)
                             ->get()
                             ->result_array();

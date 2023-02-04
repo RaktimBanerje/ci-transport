@@ -4,7 +4,7 @@
     <!-- Page Heading -->
     <div class="row">
         <div class="col-md-6">
-            <h1 class="h3 mb-4 text-gray-800">Materials</h1>
+            <h1 class="h3 mb-4 text-gray-800">Places</h1>
         </div>
         <div class="col-md-6">
             <?php if ($this->session->flashdata("success")) { ?>
@@ -27,28 +27,22 @@
             <table data-toggle="table" class="table table-sm" id="dataTable" width="100%" cellspacing="0"  data-resizable-columns-id="demo-table">
                 <thead>
                     <tr>
-                        <th data-resizable-column-id="name">Material Name</th>
-                        <th data-resizable-column-id="broker_name">Broker Name</th>
-                        <th data-resizable-column-id="broker_rate">Broker Rate</th>
-                        <th data-resizable-column-id="client_name">Client Name</th>
-                        <th data-resizable-column-id="client_rate">Client Rate</th>
+                        <th data-resizable-column-id="name">Place</th>
+                        <th data-resizable-column-id="client_name">Client</th>
+                        <th data-resizable-column-id="extra_rate_per_truck">Extra Rate Per Truck</th>
 
                         <th colspan=2 data-resizable-column-id="action">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($materials as $key => $material) { ?>
+                    <?php foreach ($places as $key => $place) { ?>
                         <tr>
-                            <td><?php echo $material["name"] ?></td>
-                            <td><?php echo $material["broker_name"] ?></td>
-                            <td><?php echo $material["broker_rate"] ?></td>
-                            <td><?php echo $material["client_name"] ?></td>
-                            <td><?php echo $material["client_rate"] ?></td>
+                            <td><?php echo $place["name"] ?></td>
+                            <td><?php echo $place["client_name"] ?></td>
+                            <td><?php echo $place["extra_rate_per_truck"] ?></td>
                             <td>
-                                <div class="btn-group" role="group">
-                                    <a href="<?php echo base_url()?>material/edit/<?php echo $material["id"] ?>" class="btn btn-sm btn-outline-primary"><i class="fa fa-edit"></i></a>
-                                    <a href="<?php echo base_url()?>material/delete/<?php echo $material["id"] ?>" class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i></a>
-                                </div>
+                                <a href="<?php echo base_url()?>place/edit/<?php echo $place["id"] ?>" class="btn btn-sm btn-outline-primary"><i class="fa fa-edit"></i></a>
+                                <a href="<?php echo base_url()?>place/delete/<?php echo $place["id"] ?>" class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                     <?php }  ?>
@@ -65,7 +59,7 @@
 
     async function loadData(limit, page) {
         event.preventDefault()
-        window.history.pushState({page}, "", `${base_url}broker/${limit}/${page}`)
+        window.history.pushState({page}, "", `${base_url}place/${limit}/${page}`)
         window.location.reload()
     }
 </script>

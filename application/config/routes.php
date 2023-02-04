@@ -93,7 +93,6 @@ $route["client/update"]["POST"] = "ClientController/update";
 $route["client/delete/(:any)"]["GET"] = "ClientController/delete/$1";
 $route["client/restore/(:any)"]["GET"] = "ClientController/restore/$1";
 
-
 // Material Routes
 $route["material(/:num)?(/:num)?"]["GET"] = "MaterialController/index";
 $route["material/paginate(/:any)(/:num)"]["GET"] = "MaterialController/paginate";
@@ -104,4 +103,15 @@ $route["material/edit/(:any)"]["GET"] = "MaterialController/edit/$1";
 $route["material/update"]["POST"] = "MaterialController/update";
 $route["material/delete/(:any)"]["GET"] = "MaterialController/delete/$1";
 $route["material/restore/(:any)"]["GET"] = "MaterialController/restore/$1";
+
+// Place Routes
+$route["place(/:num)?(/:num)?"]["GET"] = "PlaceController/index";
+$route["place/paginate(/:any)(/:num)"]["GET"] = "PlaceController/paginate";
+$route["place/create"]["GET"] = "PlaceController/create";
+$route["place/store"]["POST"] = "PlaceController/store";
+$route["place/show/(:any)"]["GET"] = "PlaceController/show/$1";
+$route["place/edit/(:any)"]["GET"] = "PlaceController/edit/$1";
+$route["place/update"]["POST"] = "PlaceController/update";
+$route["place/delete/(:any)"]["GET"] = "PlaceController/delete/$1";
+$route["place/restore/(:any)"]["GET"] = "PlaceController/restore/$1";
 

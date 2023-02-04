@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 31, 2023 at 10:20 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.0.25
+-- Generation Time: Feb 04, 2023 at 02:50 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -40,14 +40,14 @@ CREATE TABLE `brokers` (
   `bank_branch_name` text DEFAULT NULL,
   `deleted` tinyint(1) DEFAULT 0,
   `deleted_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `brokers`
 --
 
 INSERT INTO `brokers` (`id`, `name`, `phone_no`, `address`, `pan`, `bank_name`, `bank_account_no`, `bank_ifsc`, `bank_branch_name`, `deleted`, `deleted_at`) VALUES
-(1, 'Krishna Banerjee', '+1 (708) 723-7792', 'Cailin Cantrell', 'Ipsum quidem dolore', 'Shelby Combs', 'Pariatur Reiciendis', 'Eos ea consectetur d', 'Cullen Skinner', 1, '2023-01-31 14:17:00'),
+(1, 'Krishna Banerjee', '+1 (708) 723-7792', 'Cailin Cantrell', 'Ipsum quidem dolore', 'Shelby Combs', 'Pariatur Reiciendis', 'Eos ea consectetur d', 'Cullen Skinner', 1, '2023-02-04 17:52:00'),
 (2, 'Radha Banerjee', '+1 (736) 513-5353', 'Gareth Leonard', 'Non sed id voluptas', 'Cullen Charles', 'Provident excepteur', 'Deserunt mollit quia', 'Lyle Osborn', 1, '2023-01-31 14:17:00'),
 (3, 'Raktim Banerjee', '+1 (448) 299-7061', 'Melanie Sweet', 'Sed deserunt corrupt', 'Xerxes Carter', 'Consectetur vel qui', 'Perferendis ducimus', 'Clayton Aguilar', 1, '2023-01-31 14:17:00'),
 (4, 'Raktim Banerjee', '+1 (886) 258-2764', 'Alma Forbes', 'Necessitatibus dolor', 'Leo Hawkins', 'Porro nulla Nam aut', 'Rem nemo fugiat et v', 'Kaseem Guzman', 0, NULL),
@@ -57,7 +57,8 @@ INSERT INTO `brokers` (`id`, `name`, `phone_no`, `address`, `pan`, `bank_name`, 
 (8, 'Kristen Wilkinson', '+1 (334) 429-2535', 'Rhoda Page', 'Architecto earum dol', 'Jorden Durham', 'Minus nisi vero qui', 'Iste itaque deleniti', 'Murphy Blackwell', 1, '2023-01-31 14:17:00'),
 (9, 'Kerry Horne', '+1 (401) 327-1645', 'Gay Pitts', 'Doloribus voluptas e', 'Sara Bryant', 'Architecto culpa qu', 'Illum cupiditate id', 'Lawrence Morton', 1, '2023-01-31 14:17:00'),
 (10, 'Griffin Francis', '+1 (199) 761-3683', 'Dillon Blake', 'Et ex consectetur a', 'Uma Santana', 'Id mollit nulla sed', 'Aliquam nihil unde e', 'Uma Hopper', 0, NULL),
-(11, 'Sean Boone', '+1 (393) 791-7831', 'Brynne Poole', 'Vel est rerum quam q', 'Jorden Waters', 'Aut recusandae Non', 'Excepturi eius odit', 'Desirae Black', 0, NULL);
+(11, 'Sean Boone', '+1 (393) 791-7831', 'Brynne Poole', 'Vel est rerum quam q', 'Jorden Waters', 'Aut recusandae Non', 'Excepturi eius odit', 'Desirae Black', 0, NULL),
+(12, 'Ignacia Macias', '', '', '', '', '', '', '', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -76,7 +77,7 @@ CREATE TABLE `clients` (
   `gst_no` text DEFAULT NULL,
   `deleted` tinyint(1) DEFAULT 0,
   `deleted_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `clients`
@@ -96,6 +97,54 @@ INSERT INTO `clients` (`id`, `name`, `address`, `pin_no`, `req_no`, `purchase_or
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `materials`
+--
+
+CREATE TABLE `materials` (
+  `id` int(11) NOT NULL,
+  `name` text DEFAULT NULL,
+  `broker_id` int(11) DEFAULT NULL,
+  `broker_rate` float DEFAULT NULL,
+  `client_id` int(11) DEFAULT NULL,
+  `client_rate` int(11) DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT 0,
+  `deleted_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `materials`
+--
+
+INSERT INTO `materials` (`id`, `name`, `broker_id`, `broker_rate`, `client_id`, `client_rate`, `deleted`, `deleted_at`) VALUES
+(4, 'Krishna Banerjee', 4, 100, 5, 101, 0, NULL),
+(5, 'Sigourney Vinson', 4, 200, 9, 224, 0, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `places`
+--
+
+CREATE TABLE `places` (
+  `id` int(11) NOT NULL,
+  `name` text DEFAULT NULL,
+  `client_id` int(11) DEFAULT NULL,
+  `extra_rate_per_truck` float DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT 0,
+  `deleted_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `places`
+--
+
+INSERT INTO `places` (`id`, `name`, `client_id`, `extra_rate_per_truck`, `deleted`, `deleted_at`) VALUES
+(1, 'Krishna Banerjee', 3, 101, 0, NULL),
+(2, 'Anne Mckay', 1, 96, 1, '2023-02-04');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -103,7 +152,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `hash` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -127,7 +176,7 @@ CREATE TABLE `vehicles` (
   `owner_pan` text DEFAULT NULL,
   `deleted` tinyint(1) DEFAULT 0,
   `deleted_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `vehicles`
@@ -159,6 +208,18 @@ ALTER TABLE `clients`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `materials`
+--
+ALTER TABLE `materials`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `places`
+--
+ALTER TABLE `places`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -179,13 +240,25 @@ ALTER TABLE `vehicles`
 -- AUTO_INCREMENT for table `brokers`
 --
 ALTER TABLE `brokers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `materials`
+--
+ALTER TABLE `materials`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `places`
+--
+ALTER TABLE `places`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
