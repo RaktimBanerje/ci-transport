@@ -115,3 +115,25 @@ $route["place/update"]["POST"] = "PlaceController/update";
 $route["place/delete/(:any)"]["GET"] = "PlaceController/delete/$1";
 $route["place/restore/(:any)"]["GET"] = "PlaceController/restore/$1";
 
+// Loading Routes
+$route["loading(/:num)?(/:num)?"]["GET"] = "LoadingController/index";
+$route["loading/paginate(/:any)(/:num)"]["GET"] = "LoadingController/paginate";
+$route["loading/create"]["GET"] = "LoadingController/create";
+$route["loading/store"]["POST"] = "LoadingController/store";
+$route["loading/show/(:any)"]["GET"] = "LoadingController/show/$1";
+$route["loading/edit/(:any)"]["GET"] = "LoadingController/edit/$1";
+$route["loading/update"]["POST"] = "LoadingController/update";
+$route["loading/delete/(:any)"]["GET"] = "LoadingController/delete/$1";
+$route["loading/restore/(:any)"]["GET"] = "LoadingController/restore/$1";
+
+// Unloading Routes
+$route["unloading(/:num)?(/:num)?"]["GET"] = "UnloadingController/index";
+$route["unloading/paginate(/:any)(/:num)"]["GET"] = "UnloadingController/paginate";
+$route["unloading/create"]["GET"] = "UnloadingController/create";
+$route["unloading/store"]["POST"] = "UnloadingController/store";
+$route["unloading/show/(:any)"]["GET"] = "UnloadingController/show/$1";
+$route["unloading/edit/(:any)"]["GET"] = "UnloadingController/edit/$1";
+$route["unloading/update"]["POST"] = "UnloadingController/update";
+$route["unloading/delete/(:any)"]["GET"] = "UnloadingController/delete/$1";
+$route["unloading/restore/(:any)"]["GET"] = "UnloadingController/restore/$1";
+

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2023 at 01:05 AM
+-- Generation Time: Feb 15, 2023 at 12:25 PM
 -- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- PHP Version: 8.1.6
 
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -142,6 +142,15 @@ CREATE TABLE `loadings` (
   `deleted_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `loadings`
+--
+
+INSERT INTO `loadings` (`id`, `broker_id`, `loading_date`, `vehicle_id`, `fright_slip_no`, `challan_no`, `loading_qun`, `material_id`, `price`, `loading_point`, `cash_advance`, `bank_advance`, `pump_id`, `diesal_advance_amount`, `broker_advance`, `driver_commission`, `deleted`, `deleted_at`) VALUES
+(1, 11, '2012-03-12', 0, 'Velit sunt iste cum', 'Omnis est explicabo', 8.00, 0, 642.00, 'Do veritatis rem tem', 2.00, 56.00, 0, 0.00, 65.00, 9.00, 0, NULL),
+(2, 6, '2019-03-13', 0, 'Quos quae quia ea mo', 'Amet non explicabo', 82.00, 0, 409.00, 'Amet consequatur I', 99.00, 74.00, 0, 0.00, 3.00, 55.00, 0, NULL),
+(3, 12, '2017-05-22', 0, 'Dolores quisquam sap', 'Ipsa numquam quibus', 31.00, 0, 675.00, 'Sed eum aut ut totam', 84.00, 35.00, 0, 0.00, 84.00, 33.00, 0, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -165,7 +174,8 @@ CREATE TABLE `materials` (
 
 INSERT INTO `materials` (`id`, `name`, `broker_id`, `broker_rate`, `client_id`, `client_rate`, `deleted`, `deleted_at`) VALUES
 (4, 'Krishna Banerjee', 4, 100, 5, 101, 0, NULL),
-(5, 'Sigourney Vinson', 4, 200, 9, 224, 0, NULL);
+(5, 'Sigourney Vinson', 4, 200, 9, 224, 0, NULL),
+(6, '', 6, 0, 0, 0, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -308,13 +318,13 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT for table `loadings`
 --
 ALTER TABLE `loadings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `materials`
 --
 ALTER TABLE `materials`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `places`

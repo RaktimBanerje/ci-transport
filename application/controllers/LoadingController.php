@@ -9,7 +9,7 @@
             $this->load->model("Loading");
             $this->load->model("Broker");
             $this->load->model("Vehicle");
-            $this->load->model("Client");
+            $this->load->model("Material");
         }
 
         public function index() {
@@ -69,7 +69,8 @@
 
             $data = [
                 "brokers" => $this->Broker->get(),
-                "clients" => $this->Client->get()
+                "vahicles" => $this->Vehicle->get(),
+                "materils" => $this->Material->get()
             ];
 
             $this->load->view("inc/header");
@@ -101,7 +102,6 @@
                 "broker_advance " => trim($this->input->post("broker_advance")),
                 "driver_commission" => trim($this->input->post("driver_commission")),
             ];
-
 
             $this->Loading->insert($data);
 
