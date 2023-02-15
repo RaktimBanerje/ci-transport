@@ -1,0 +1,20 @@
+Vehicle 
+
+1. Vehicle Reg No. should be unique
+2. Everything is in UPPERCASE
+3. Add Filed (Bank Name, Bank Account No., Branch Name, IFC Code)
+
+Broker
+
+1. Broker PAN Card (PDF Upload)
+
+Client
+
+1. DELETE (Request No. Purchase Order No. Purchase Order Date)
+
+Meterial
+
+1. Add Filed (Broker - From Date - To Date)
+2. Add Filed (Client - From Date - To Date)
+
+Delete Place 

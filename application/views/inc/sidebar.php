@@ -90,6 +90,22 @@
             </div>
         </li>
 
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseFive">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Loading/ Unloading</span>
+            </a>
+            <div id="collapseSix" class="collapse" aria-labelledby="collapseSix" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="<?php echo base_url() ?>loading/create">Per Day Loading</a>
+                    <a class="collapse-item" href="<?php echo base_url() ?>loading">View Loading</a>
+                    <a class="collapse-item" href="<?php echo base_url() ?>unloading/create">Unloading</a>
+                    <a class="collapse-item" href="<?php echo base_url() ?>unloading">View Unloading</a>
+                </div>
+            </div>
+        </li>
+
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 

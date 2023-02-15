@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 04, 2023 at 02:50 PM
+-- Generation Time: Feb 15, 2023 at 01:05 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -63,6 +63,27 @@ INSERT INTO `brokers` (`id`, `name`, `phone_no`, `address`, `pan`, `bank_name`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cashers`
+--
+
+CREATE TABLE `cashers` (
+  `id` int(11) NOT NULL,
+  `name` text DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `phone_no` text DEFAULT NULL,
+  `pan` text DEFAULT NULL,
+  `aadhaar` text DEFAULT NULL,
+  `bank_name` text DEFAULT NULL,
+  `bank_account_no` text DEFAULT NULL,
+  `bank_ifsc` text DEFAULT NULL,
+  `bank_branch_name` text DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT 0,
+  `deleted_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `clients`
 --
 
@@ -93,6 +114,33 @@ INSERT INTO `clients` (`id`, `name`, `address`, `pin_no`, `req_no`, `purchase_or
 (7, 'Judah Forbes', 'safsafsaf', 'Voluptas commodi et', 'Aute totam magna rep', 'Optio occaecat comm', '2021-08-18', 'Rem accusamus cupida', 0, NULL),
 (8, 'April Boone', 'asfsafsafsa', 'Exercitationem nisi', 'Sunt neque aliquip q', 'Proident voluptatum', '2006-03-14', 'Dicta quas quam est', 0, NULL),
 (9, 'Beatrice Reese', '30-Nov-2019', 'Dolore vel qui lorem', 'Do numquam voluptas', 'Delectus voluptatem', '1999-07-04', 'ertyreyhrtret', 0, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `loadings`
+--
+
+CREATE TABLE `loadings` (
+  `id` int(11) NOT NULL,
+  `broker_id` int(11) DEFAULT NULL,
+  `loading_date` date DEFAULT NULL,
+  `vehicle_id` int(11) DEFAULT NULL,
+  `fright_slip_no` text DEFAULT NULL,
+  `challan_no` text DEFAULT NULL,
+  `loading_qun` float(11,2) DEFAULT NULL,
+  `material_id` int(11) DEFAULT NULL,
+  `price` float(11,2) DEFAULT NULL,
+  `loading_point` text DEFAULT NULL,
+  `cash_advance` float(11,2) DEFAULT NULL,
+  `bank_advance` float(11,2) DEFAULT NULL,
+  `pump_id` int(11) DEFAULT NULL,
+  `diesal_advance_amount` float(11,2) DEFAULT NULL,
+  `broker_advance` float(11,2) DEFAULT NULL,
+  `driver_commission` float(11,2) DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT 0,
+  `deleted_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -179,19 +227,6 @@ CREATE TABLE `vehicles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `vehicles`
---
-
-INSERT INTO `vehicles` (`id`, `registration_no`, `registration_copy`, `owner_name`, `owner_phone`, `owner_pan`, `deleted`, `deleted_at`) VALUES
-(1, 'Molestiae et fugiat', NULL, 'Nerea Douglas', '+1 (656) 656-6537', NULL, 0, '2023-01-30 00:00:00'),
-(2, 'Excepteur quis et do', NULL, 'Keaton Delacruz', '+1 (336) 517-1329', NULL, 0, '2023-01-30 00:00:00'),
-(3, 'Excepteur quis et do', '1675036162.pdf', 'Keaton Delacruz', '+1 (336) 517-1329', NULL, 0, '2023-01-30 00:00:00'),
-(4, 'Ut impedit saepe pe', '1675036200.pdf', 'Hunter Elliott', '+1 (493) 249-8566', '16750362001.pdf', 0, '2023-01-30 00:00:00'),
-(5, 'Laudantium eligendi', '1675036495.pdf', 'Hiram Hardy', '+1 (939) 369-8959', '16750364951.pdf', 0, '2023-01-30 23:36:00'),
-(6, 'In qui enim libero e', '1675036995.pdf', 'Burke Henry', '+1 (119) 733-4299', '1675036995.pdf', 0, '2023-01-31 04:07:00'),
-(7, '12345678', '1675120280.pdf', 'Raktim Banerjee', '+919836739907', '1675120280.pdf', 0, NULL);
-
---
 -- Indexes for dumped tables
 --
 
@@ -202,10 +237,24 @@ ALTER TABLE `brokers`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `cashers`
+--
+ALTER TABLE `cashers`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `clients`
 --
 ALTER TABLE `clients`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `loadings`
+--
+ALTER TABLE `loadings`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `fright_slip_no` (`fright_slip_no`) USING HASH,
+  ADD UNIQUE KEY `challan_no` (`challan_no`) USING HASH;
 
 --
 -- Indexes for table `materials`
@@ -230,7 +279,8 @@ ALTER TABLE `users`
 -- Indexes for table `vehicles`
 --
 ALTER TABLE `vehicles`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `registration_no` (`registration_no`) USING HASH;
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -243,10 +293,22 @@ ALTER TABLE `brokers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `cashers`
+--
+ALTER TABLE `cashers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `loadings`
+--
+ALTER TABLE `loadings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `materials`
