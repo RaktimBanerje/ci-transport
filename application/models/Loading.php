@@ -6,10 +6,25 @@
 
         public function get($id = NULL, $limit = NULL, $start = 0) {
             if($id) {
-                return $this->db->where(["id" => $id, "deleted" => 0])->get($this->table)->row_array();
+                return $this->db->select("*, brokers.name as broker, vehicles.registration_no as vehicle, materials.name as material")
+                                ->from($this->table)
+                                ->join("brokers", "brokers.id = loadings.broker_id")
+                                ->join("vehicles", "vehicles.id = loadings.vehicle_id")
+                                ->join("materials", "materials.id = loadings.material_id")
+                                ->where(["id" => $id, "loadings.deleted" => 0])
+                                ->get()
+                                ->row_array();
             }
             else {
-                return $this->db->where("deleted", 0)->limit($limit, $start)->get($this->table)->result_array();
+                return $this->db->select("*, brokers.name as broker, vehicles.registration_no as vehicle, materials.name as material")
+                                ->from($this->table)
+                                ->join("brokers", "brokers.id = loadings.broker_id")
+                                ->join("vehicles", "vehicles.id = loadings.vehicle_id")
+                                ->join("materials", "materials.id = loadings.material_id")
+                                ->where("loadings.deleted", 0)
+                                ->limit($limit, $start)
+                                ->get()
+                                ->result_array();
             }
         }
 

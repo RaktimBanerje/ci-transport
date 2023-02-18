@@ -137,3 +137,13 @@ $route["unloading/update"]["POST"] = "UnloadingController/update";
 $route["unloading/delete/(:any)"]["GET"] = "UnloadingController/delete/$1";
 $route["unloading/restore/(:any)"]["GET"] = "UnloadingController/restore/$1";
 
+// Pump Routes
+$route["pump(/:num)?(/:num)?"]["GET"] = "PumpController/index";
+$route["pump/paginate(/:any)(/:num)"]["GET"] = "PumpController/paginate";
+$route["pump/create"]["GET"] = "PumpController/create";
+$route["pump/store"]["POST"] = "PumpController/store";
+$route["pump/show/(:any)"]["GET"] = "PumpController/show/$1";
+$route["pump/edit/(:any)"]["GET"] = "PumpController/edit/$1";
+$route["pump/update"]["POST"] = "PumpController/update";
+$route["pump/delete/(:any)"]["GET"] = "PumpController/delete/$1";
+$route["pump/restore/(:any)"]["GET"] = "PumpController/restore/$1";

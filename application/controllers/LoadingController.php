@@ -69,7 +69,7 @@
 
             $data = [
                 "brokers" => $this->Broker->get(),
-                "vahicles" => $this->Vehicle->get(),
+                "vehicles" => $this->Vehicle->get(),
                 "materils" => $this->Material->get()
             ];
 
