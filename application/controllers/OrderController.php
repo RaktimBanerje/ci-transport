@@ -1,12 +1,13 @@
 <?php 
     defined('BASEPATH') OR exit('No direct script access allowed');
 
-    class PumpController extends CI_Controller {
+    class OrderController extends CI_Controller {
         public function __construct() {
             parent::__construct();
 
             $this->config->load('pagination', TRUE);
-            $this->load->model("Pump");
+            $this->load->model("Order");
+            $this->load->model("Client");
         }
 
         public function index() {
@@ -15,8 +16,8 @@
             }
 
             $pagination = $this->config->item('pagination');
-            $pagination["base_url"] = base_url().'pump';
-            $pagination["total_rows"] = count($this->Pump->get());
+            $pagination["base_url"] = base_url().'order';
+            $pagination["total_rows"] = count($this->Order->get());
             $pagination["per_page"] = $this->uri->segment(2)? $this->uri->segment(2) : 10;
             $this->pagination->initialize($pagination);
 
@@ -25,12 +26,12 @@
 
             $data = array(
                 'pagination_link'  => $this->pagination->create_links(),
-                'pumps'   => $this->Pump->get(NULL, $pagination["per_page"], $start),
+                'orders'   => $this->Order->get(NULL, $pagination["per_page"], $start),
                 'limit' => $pagination["per_page"],
             );
 
             $this->load->view("inc/header");
-            $this->load->view("Pump/index", $data);
+            $this->load->view("Order/index", $data);
             $this->load->view("inc/footer");
         }
 
@@ -40,9 +41,9 @@
             }
 
             $pagination = $this->config->item('pagination');
-            $pagination["base_url"] = base_url().'pump';
+            $pagination["base_url"] = base_url().'order';
             $pagination["uri_segment"] = 4;
-            $pagination["total_rows"] = count($this->Pump->get());
+            $pagination["total_rows"] = count($this->Order->get());
             $pagination["per_page"] = $this->uri->segment(3)? (int)$this->uri->segment(3) : 10;
             $this->pagination->initialize($pagination);
 
@@ -51,7 +52,7 @@
 
             $data = array(
                 'pagination_link'  => $this->pagination->create_links(),
-                'pumps'   => $this->Pump->get(NULL, $pagination["per_page"], $start),
+                'orders'   => $this->Order->get(NULL, $pagination["per_page"], $start),
             );
 
             header("content-type: application/json");
@@ -64,8 +65,10 @@
                 return redirect(base_url());
             }
 
+            $clients = $this->Client->get();
+
             $this->load->view("inc/header");
-            $this->load->view("Pump/create");
+            $this->load->view("Order/create", ['clients' => $clients]);
             $this->load->view("inc/footer");
         }
 
@@ -76,20 +79,16 @@
 
             $data = [
                 "name" => trim($this->input->post("name")),
-                "phone_no" => trim($this->input->post("phone_no")),
-                "address" => trim($this->input->post("address")),
-                "gst_no" => trim($this->input->post("gst_no")),
-                "bank_name" => trim($this->input->post("bank_name")),
-                "bank_account_no" => trim($this->input->post("bank_account_no")),
-                "bank_ifsc" => trim($this->input->post("bank_ifsc")),
-                "bank_branch_name" => trim($this->input->post("bank_branch_name")),
+                "client_id" => trim($this->input->post("client_id")),
+                "purchase_order_no" => trim($this->input->post("purchase_order_no")),
+                "purchase_order_date" => trim($this->input->post("purchase_order_date")),
             ];
 
 
-            $this->Pump->insert($data);
+            $this->Order->insert($data);
 
             $this->session->set_flashdata("success", "New record inserted");;
-            return redirect(base_url() . "pump/create");
+            return redirect(base_url() . "order/create");
         }
 
         public function show($id) {
@@ -99,20 +98,21 @@
         
             header("content-type: application/json");
 
-            $pump = $this->Pump->get($id);
+            $order = $this->Order->get($id);
 
-            echo json_encode($pump);
+            echo json_encode($order);
         }
 
         public function edit($id) {
             if(!$this->session->user) {
                 return redirect(base_url());
             }
-
-            $pump = $this->Pump->get($id);
+            
+            $clients = $this->Client->get();
+            $order = $this->Order->get($id);
 
             $this->load->view("inc/header");
-            $this->load->view("Pump/edit", ["pump" => $pump]);
+            $this->load->view("Order/edit", ["order" => $order, 'clients' => $clients]);
             $this->load->view("inc/footer");
         }
 
@@ -125,19 +125,15 @@
             
             $data = [
                 "name" => trim($this->input->post("name")),
-                "phone_no" => trim($this->input->post("phone_no")),
-                "address" => trim($this->input->post("address")),
-                "gst_no" => trim($this->input->post("gst_no")),
-                "bank_name" => trim($this->input->post("bank_name")),
-                "bank_account_no" => trim($this->input->post("bank_account_no")),
-                "bank_ifsc" => trim($this->input->post("bank_ifsc")),
-                "bank_branch_name" => trim($this->input->post("bank_branch_name")),
+                "client_id" => trim($this->input->post("client_id")),
+                "purchase_order_no" => trim($this->input->post("purchase_order_no")),
+                "purchase_order_date" => trim($this->input->post("purchase_order_date")),
             ];
 
-            $this->Pump->Update($id, $data);
+            $this->Order->Update($id, $data);
 
             $this->session->set_flashdata("success", "Record updated");
-            return redirect(base_url() . "pump");
+            return redirect(base_url() . "order");
             
         }
 
@@ -146,21 +142,21 @@
                 return redirect(base_url());
             }          
             
-            $this->Pump->delete($id, date("Y-m-d H:i", time()));
+            $this->Order->delete($id, date("Y-m-d H:i", time()));
 
             $this->session->set_flashdata("success", "Record deleted");
-            return redirect(base_url() . "pump");
+            return redirect(base_url() . "order");
         }
 
         public function restore($id) {
             if(!$this->session->user) {
-                return redirect(base_url() . "pump");
+                return redirect(base_url() . "order");
             }          
             
-            $this->Pump->restore($id);
+            $this->Order->restore($id);
 
             $this->session->set_flashdata("success", "Record restored");;
-            return redirect(base_url() . "pump");
+            return redirect(base_url() . "order");
         }
 
         protected function upload_file($path, $file, $new_file_name){

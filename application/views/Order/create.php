@@ -4,7 +4,7 @@
     <!-- Page Heading -->
     <div class="row">
         <div class="col-md-6">
-            <h1 class="h3 mb-4 text-gray-800">Create Pump</h1>
+            <h1 class="h3 mb-4 text-gray-800">Create Order</h1>
         </div>
         <div class="col-md-6">
             <?php if ($this->session->flashdata("success")) { ?>
@@ -24,54 +24,35 @@
 
     <div class="card card-flush">
         <div class="card-body">
-            <form action="<?php echo base_url() ?>pump/store" method="POST" enctype="multipart/form-data">
+            <form action="<?php echo base_url() ?>order/store" method="POST" enctype="multipart/form-data">
                 <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="name">Pump Name: </label>
+                                <label for="name">Order Name: </label>
                                 <input id="name" name="name" type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="address">Pump Phone No.: </label>
-                                <input id="phone_no" name="phone_no" type="text" class="form-control" />
+                                <label for="address">Client: </label>
+                                <select class="form-control" name="client_id">
+                                    <option value="">Please Select</option>
+                                    <?php foreach($clients as $client) { ?>
+                                        <option value="<?php echo $client['id']?>"><?php echo $client['name']?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="name">Pump Address: </label>
-                                <input id="address" name="address" type="text" class="form-control" />
+                                <label for="name">Purchase Order No: </label>
+                                <input id="purchase_order_no" name="purchase_order_no" type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="address">Pump GST No: </label>
-                                <input id="gst_no" name="gst_no" type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="name">Bank Name: </label>
-                                <input id="bank_name" name="bank_name" type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="address">Bank Account No: </label>
-                                <input id="bank_account_no" name="bank_account_no" type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="name">Bank IFS Code: </label>
-                                <input id="bank_ifsc" name="bank_ifsc" type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="address">Branch Name: </label>
-                                <input id="bank_branch_name" name="bank_branch_name" type="text" class="form-control" />
+                                <label for="address">Purchase Order Date: </label>
+                                <input id="purchase_order_date" name="purchase_order_date" type="date" class="form-control" />
                             </div>
                         </div>
                         <div class="col-md-6">

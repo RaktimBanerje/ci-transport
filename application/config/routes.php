@@ -147,3 +147,37 @@ $route["pump/edit/(:any)"]["GET"] = "PumpController/edit/$1";
 $route["pump/update"]["POST"] = "PumpController/update";
 $route["pump/delete/(:any)"]["GET"] = "PumpController/delete/$1";
 $route["pump/restore/(:any)"]["GET"] = "PumpController/restore/$1";
+
+// Order Routes
+$route["order(/:num)?(/:num)?"]["GET"] = "OrderController/index";
+$route["order/paginate(/:any)(/:num)"]["GET"] = "OrderController/paginate";
+$route["order/create"]["GET"] = "OrderController/create";
+$route["order/store"]["POST"] = "OrderController/store";
+$route["order/show/(:any)"]["GET"] = "OrderController/show/$1";
+$route["order/edit/(:any)"]["GET"] = "OrderController/edit/$1";
+$route["order/update"]["POST"] = "OrderController/update";
+$route["order/delete/(:any)"]["GET"] = "OrderController/delete/$1";
+$route["order/restore/(:any)"]["GET"] = "OrderController/restore/$1";
+
+// Loading Point Routes
+$route["loading-point(/:num)?(/:num)?"]["GET"] = "LoadingPointController/index";
+$route["loading-point/paginate(/:any)(/:num)"]["GET"] = "LoadingPointController/paginate";
+$route["loading-point/create"]["GET"] = "LoadingPointController/create";
+$route["loading-point/store"]["POST"] = "LoadingPointController/store";
+$route["loading-point/show/(:any)"]["GET"] = "LoadingPointController/show/$1";
+$route["loading-point/edit/(:any)"]["GET"] = "LoadingPointController/edit/$1";
+$route["loading-point/update"]["POST"] = "LoadingPointController/update";
+$route["loading-point/delete/(:any)"]["GET"] = "LoadingPointController/delete/$1";
+$route["loading-point/restore/(:any)"]["GET"] = "LoadingPointController/restore/$1";
+
+// Unloading Point Routes
+$route["unloading-point(/:num)?(/:num)?"]["GET"] = "UnloadingPointController/index";
+$route["unloading-point/paginate(/:any)(/:num)"]["GET"] = "UnloadingPointController/paginate";
+$route["unloading-point/create"]["GET"] = "UnloadingPointController/create";
+$route["unloading-point/store"]["POST"] = "UnloadingPointController/store";
+$route["unloading-point/show/(:any)"]["GET"] = "UnloadingPointController/show/$1";
+$route["unloading-point/edit/(:any)"]["GET"] = "UnloadingPointController/edit/$1";
+$route["unloading-point/update"]["POST"] = "UnloadingPointController/update";
+$route["unloading-point/delete/(:any)"]["GET"] = "UnloadingPointController/delete/$1";
+$route["unloading-point/restore/(:any)"]["GET"] = "UnloadingPointController/restore/$1";
+
