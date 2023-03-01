@@ -30,9 +30,12 @@
                         <th data-resizable-column-id="name">Material Name</th>
                         <th data-resizable-column-id="broker_name">Broker Name</th>
                         <th data-resizable-column-id="broker_rate">Broker Rate</th>
+                        <th data-resizable-column-id="broker_from_date">From Date</th>
+                        <th data-resizable-column-id="broker_to_date">To Date</th>
                         <th data-resizable-column-id="client_name">Client Name</th>
                         <th data-resizable-column-id="client_rate">Client Rate</th>
-
+                        <th data-resizable-column-id="client_from_date">From Date</th>
+                        <th data-resizable-column-id="client_to_date">To Date</th>
                         <th colspan=2 data-resizable-column-id="action">Action</th>
                     </tr>
                 </thead>
@@ -42,8 +45,12 @@
                             <td><?php echo $material["name"] ?></td>
                             <td><?php echo $material["broker_name"] ?></td>
                             <td><?php echo $material["broker_rate"] ?></td>
+                            <td><?php echo $material["broker_from_date"] ?></td>
+                            <td><?php echo $material["broker_to_date"] ?></td>
                             <td><?php echo $material["client_name"] ?></td>
                             <td><?php echo $material["client_rate"] ?></td>
+                            <td><?php echo $material["client_from_date"] ?></td>
+                            <td><?php echo $material["client_to_date"] ?></td>
                             <td>
                                 <div class="btn-group" role="group">
                                     <a href="<?php echo base_url()?>material/edit/<?php echo $material["id"] ?>" class="btn btn-sm btn-outline-primary"><i class="fa fa-edit"></i></a>

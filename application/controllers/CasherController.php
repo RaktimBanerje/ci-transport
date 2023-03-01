@@ -1,12 +1,12 @@
 <?php 
     defined('BASEPATH') OR exit('No direct script access allowed');
 
-    class VehicleController extends CI_Controller {
+    class CasherController extends CI_Controller {
         public function __construct() {
             parent::__construct();
 
             $this->config->load('pagination', TRUE);
-            $this->load->model("Vehicle");
+            $this->load->model("Casher");
         }
 
         public function index() {
@@ -15,8 +15,8 @@
             }
 
             $pagination = $this->config->item('pagination');
-            $pagination["base_url"] = base_url().'vehicle';
-            $pagination["total_rows"] = count($this->Vehicle->get());
+            $pagination["base_url"] = base_url().'casher';
+            $pagination["total_rows"] = count($this->Casher->get());
             $pagination["per_page"] = $this->uri->segment(2)? $this->uri->segment(2) : 10;
             $this->pagination->initialize($pagination);
 
@@ -25,12 +25,12 @@
 
             $data = array(
                 'pagination_link'  => $this->pagination->create_links(),
-                'vehicles'   => $this->Vehicle->get(NULL, $pagination["per_page"], $start),
+                'cashers'   => $this->Casher->get(NULL, $pagination["per_page"], $start),
                 'limit' => $pagination["per_page"],
             );
 
             $this->load->view("inc/header");
-            $this->load->view("Vehicle/index", $data);
+            $this->load->view("Casher/index", $data);
             $this->load->view("inc/footer");
         }
 
@@ -40,9 +40,9 @@
             }
 
             $pagination = $this->config->item('pagination');
-            $pagination["base_url"] = base_url().'vehicle';
+            $pagination["base_url"] = base_url().'casher';
             $pagination["uri_segment"] = 4;
-            $pagination["total_rows"] = count($this->Vehicle->get());
+            $pagination["total_rows"] = count($this->Casher->get());
             $pagination["per_page"] = $this->uri->segment(3)? (int)$this->uri->segment(3) : 10;
             $this->pagination->initialize($pagination);
 
@@ -51,7 +51,7 @@
 
             $data = array(
                 'pagination_link'  => $this->pagination->create_links(),
-                'vehicles'   => $this->Vehicle->get(NULL, $pagination["per_page"], $start),
+                'cashers'   => $this->Casher->get(NULL, $pagination["per_page"], $start),
             );
 
             header("content-type: application/json");
@@ -65,7 +65,7 @@
             }
 
             $this->load->view("inc/header");
-            $this->load->view("Vehicle/create");
+            $this->load->view("Casher/create");
             $this->load->view("inc/footer");
         }
 
@@ -74,33 +74,20 @@
                 return redirect(base_url());
             }
 
-            $data = [
-                "registration_no" => strtoupper(trim($this->input->post("registration_no"))),
-                "wheel_type" => strtoupper(trim($this->input->post("wheel_type"))),
-                "registration_copy" => null,
-                "owner_name" => strtoupper(trim($this->input->post("owner_name"))),
-                "owner_phone" => strtoupper(trim($this->input->post("owner_phone"))),
-                "owner_pan" => null,
-                "bank_name" => strtoupper(trim($this->input->post("bank_name"))),
-                "bank_account_no" => strtoupper(trim($this->input->post("bank_account_no"))),
-                "bank_ifsc" => strtoupper(trim($this->input->post("bank_ifsc"))),
-                "bank_branch_name" => strtoupper(trim($this->input->post("bank_branch_name")))
-            ];
-
-            $registration_copy = $this->upload_file("storage/registrations", "registration_copy", time());
-            if($registration_copy["status"] == true) {
-                $data["registration_copy"] = $registration_copy['upload_data']['file_name'];
+            $pan_copy = $this->upload_file("storage/files", "pan", time());
+            if($pan_copy["status"] == true) {
+                $_POST["pan"] = $pan_copy['upload_data']['file_name'];
             }
 
-            $owner_pan = $this->upload_file("storage/pans", "owner_pan", time());
-            if($owner_pan["status"] == true) {
-                $data["owner_pan"] = $owner_pan['upload_data']['file_name'];
+            $aadhaar_copy = $this->upload_file("storage/files", "aadhaar", time());
+            if($aadhaar_copy["status"] == true) {
+                $_POST["aadhaar"] = $aadhaar_copy['upload_data']['file_name'];
             }
 
-            $this->Vehicle->insert($data);
+            $this->Casher->insert($_POST);
 
             $this->session->set_flashdata("success", "New record inserted");;
-            return redirect(base_url() . "vehicle/create");
+            return redirect(base_url() . "casher/create");
         }
 
         public function show($id) {
@@ -110,9 +97,9 @@
         
             header("content-type: application/json");
 
-            $vehicle = $this->Vehicle->get($id);
+            $casher = $this->Casher->get($id);
 
-            echo json_encode($vehicle);
+            echo json_encode($casher);
         }
 
         public function edit($id) {
@@ -120,10 +107,10 @@
                 return redirect(base_url());
             }
 
-            $vehicle = $this->Vehicle->get($id);
+            $casher = $this->Casher->get($id);
 
             $this->load->view("inc/header");
-            $this->load->view("Vehicle/edit", ["vehicle" => $vehicle]);
+            $this->load->view("Casher/edit", ["casher" => $casher]);
             $this->load->view("inc/footer");
         }
 
@@ -133,35 +120,25 @@
             }
 
             $id = trim($this->input->post("id"));
-            $old_vehicle = $this->Vehicle->get($id);
+            $old_date = $this->Casher->get($id);
 
-            $data = [
-                "registration_no" => strtoupper(trim($this->input->post("registration_no"))),
-                "wheel_type" => strtoupper(trim($this->input->post("wheel_type"))),
-                "owner_name" => strtoupper(trim($this->input->post("owner_name"))),
-                "owner_phone" => strtoupper(trim($this->input->post("owner_phone"))),
-                "bank_name" => strtoupper(trim($this->input->post("bank_name"))),
-                "bank_account_no" => strtoupper(trim($this->input->post("bank_account_no"))),
-                "bank_ifsc" => strtoupper(trim($this->input->post("bank_ifsc"))),
-                "bank_branch_name" => strtoupper(trim($this->input->post("bank_branch_name")))
-            ];
-
-            $registration_copy = $this->upload_file("storage/registrations", "registration_copy", time());
-            if($registration_copy["status"] == true) {
-                $data["registration_copy"] = $registration_copy['upload_data']['file_name'];
-                $this->delete_file("storage/registrations/".$old_vehicle["registration_copy"]);
+            $pan_copy = $this->upload_file("storage/files", "pan", time());
+            if($pan_copy["status"] == true) {
+                $_POST["pan"] = $pan_copy['upload_data']['file_name'];
+                $this->delete_file("storage/registrations/".$old_date["registration_copy"]);
             }
 
-            $owner_pan = $this->upload_file("storage/pans", "owner_pan", time());
-            if($owner_pan["status"] == true) {
-                $data["owner_pan"] = $owner_pan['upload_data']['file_name'];
-                $this->delete_file("storage/pans/".$old_vehicle["owner_pan"]);
+            $aadhaar_copy = $this->upload_file("storage/files", "aadhaar", time());
+            if($aadhaar_copy["status"] == true) {
+                $_POST["aadhaar"] = $aadhaar_copy['upload_data']['file_name'];
+                $this->delete_file("storage/registrations/".$old_date["registration_copy"]);
             }
 
-            $this->Vehicle->Update($id, $data);
+            $this->Casher->Update($id, $_POST);
 
             $this->session->set_flashdata("success", "Record updated");
-            return redirect(base_url() . "vehicle");
+            return redirect(base_url() . "casher");
+            
         }
 
         public function delete($id) {
@@ -169,21 +146,21 @@
                 return redirect(base_url());
             }          
             
-            $this->Vehicle->delete($id, date("Y-m-d H:i", time()));
+            $this->Casher->delete($id, date("Y-m-d H:i", time()));
 
             $this->session->set_flashdata("success", "Record deleted");
-            return redirect(base_url() . "vehicle");
+            return redirect(base_url() . "casher");
         }
 
         public function restore($id) {
             if(!$this->session->user) {
-                return redirect(base_url() . "vehicle");
+                return redirect(base_url() . "casher");
             }          
             
-            $this->Vehicle->restore($id);
+            $this->Casher->restore($id);
 
             $this->session->set_flashdata("success", "Record restored");;
-            return redirect(base_url() . "vehicle");
+            return redirect(base_url() . "casher");
         }
 
         protected function upload_file($path, $file, $new_file_name){

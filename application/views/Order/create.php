@@ -36,7 +36,7 @@
                             <div class="form-group">
                                 <label for="address">Client: </label>
                                 <select class="form-control" name="client_id">
-                                    <option value="">Please Select</option>
+                                    <option value="">Select</option>
                                     <?php foreach($clients as $client) { ?>
                                         <option value="<?php echo $client['id']?>"><?php echo $client['name']?></option>
                                     <?php } ?>

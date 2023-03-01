@@ -36,7 +36,7 @@
                             <div class="form-group">
                                 <label for="address">Client: </label>
                                 <select name="client_id" type="text" class="form-control">
-                                    <option value="">Please Select</option>
+                                    <option value="">Select</option>
                                     <?php foreach($clients as $client) { ?>
                                         <option value="<?php echo $client['id'] ?>" <?php if($client['id'] == $place['client_id']) {echo "selected";} ?>><?php echo $client['name'] ?></option>
                                     <?php } ?>
@@ -46,7 +46,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="name">Extra Rate Per Truck </label>
-                                <input id="extra_rate_per_truck" name="extra_rate_per_truck" type="number" class="form-control" value="<?php echo $place['extra_rate_per_truck'] ?>" />
+                                <input id="extra_rate_per_truck" name="extra_rate_per_truck" type="text" class="form-control" value="<?php echo $place['extra_rate_per_truck'] ?>" />
                             </div>
                         </div>
                         <div class="col-md-3">

@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <label for="name">Broker: </label>
                             <select class="form-control" name="broker_id">
-                                <option value="">Please Select</option>    
+                                <option value="">Select</option>    
                                 <?php foreach($brokers as $broker) { ?>
                                     <option value="<?php echo $broker['id'] ?>"><?php echo $broker['name'] ?></option>
                                 <?php } ?>
@@ -47,7 +47,7 @@
                         <div class="form-group">
                             <label for="name">Vehicle: </label>
                             <select class="form-control" name="vehicle_id">
-                                <option value="">Please Select</option>
+                                <option value="">Select</option>
                                 <?php foreach($vehicles as $vehicle) { ?>
                                     <option value="<?php echo $vehicle['id'] ?>"><?php echo $vehicle['registration_no'] ?></option>
                                 <?php } ?>
@@ -69,7 +69,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="address">Loading Quantity: </label>
-                            <input name="loading_qun" type="number" class="form-control" />
+                            <input name="loading_qun" type="text" class="form-control" />
                         </div>
                     </div>
                     
@@ -77,7 +77,7 @@
                         <div class="form-group">
                             <label for="name">Material: </label>
                             <select class="form-control" name="material_id">
-                                <option value="">Please Select</option>
+                                <option value="">Select</option>
                                 <?php foreach($materils as $material) { ?>
                                     <option value="<?php echo $material['id'] ?>"><?php echo $material['name'] ?></option>
                                 <?php } ?>
@@ -87,7 +87,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="address">Price:</label>
-                            <input name="price" type="number" class="form-control" />
+                            <input name="price" type="text" class="form-control" />
                         </div>
                     </div>
 
@@ -100,14 +100,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="address">Cash Advance:</label>
-                            <input name="cash_advance" type="number" class="form-control" />
+                            <input name="cash_advance" type="text" class="form-control" />
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="address">Bank Advance</label>
-                            <input name="bank_advance" type="number" class="form-control" />
+                            <input name="bank_advance" type="text" class="form-control" />
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -126,14 +126,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="address">Broker Advance:</label>
-                            <input name="broker_advance" type="number" class="form-control" />
+                            <input name="broker_advance" type="text" class="form-control" />
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="address">Driver Commission:</label>
-                            <input name="driver_commission" type="number" class="form-control" />
+                            <input name="driver_commission" type="text" class="form-control" />
                         </div>
                     </div>
                 </div>

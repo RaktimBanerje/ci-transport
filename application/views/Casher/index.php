@@ -4,7 +4,7 @@
     <!-- Page Heading -->
     <div class="row">
         <div class="col-md-6">
-            <h1 class="h3 mb-4 text-gray-800">Vehicles</h1>
+            <h1 class="h3 mb-4 text-gray-800">Cashers</h1>
         </div>
         <div class="col-md-6">
             <?php if ($this->session->flashdata("success")) { ?>
@@ -27,48 +27,47 @@
             <table data-toggle="table" class="table table-sm" id="dataTable" width="100%" cellspacing="0"  data-resizable-columns-id="demo-table">
                 <thead>
                     <tr>
-                        <th data-resizable-column-id="registration_no">Registration No.</th>
-                        <th data-resizable-column-id="registration_copy">Registration Copy</th>
-                        <th data-resizable-column-id="owner_name">Owner Name</th>
-                        <th data-resizable-column-id="owner_phone">Owner Phone</th>
-                        <th data-resizable-column-id="owner_pan">Owner Pan Card</th>
-
-                        <th data-resizable-column-id="bank_name">Bank Name</th>
+                        <th data-resizable-column-id="name">Casher Name</th>
+                        <th data-resizable-column-id="phone_no">Casher Phone No.</th>
+                        <th data-resizable-column-id="address">Casher Address</th>
+                        <th data-resizable-column-id="pan">Casher PAN Card</th>
+                        <th data-resizable-column-id="aadhaar">Casher AADHAAR Card</th>
+                        <th data-resizable-column-id="bank_name">Casher Bank Name</th>
                         <th data-resizable-column-id="bank_account_no">Bank Account No</th>
                         <th data-resizable-column-id="bank_ifsc">Bank IFS Code</th>
-                        <th data-resizable-column-id="bank_branch_name">Bank Branch Name</th>
+                        <th data-resizable-column-id="bank_branch_name">Branch Name</th>
+                        <th data-resizable-column-id="balance">Balance</th>
                         <th colspan=2 data-resizable-column-id="action">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($vehicles as $key => $vehicle) { ?>
+                    <?php foreach ($cashers as $key => $casher) { ?>
                         <tr>
-                            <td><?php echo $vehicle["registration_no"] ?></td>
+                            <td><?php echo $casher["name"] ?></td>
+                            <td><?php echo $casher["phone_no"] ?></td>
+                            <td><?php echo $casher["address"] ?></td>
                             <td>
-                                <?php if($vehicle["registration_copy"]) { ?>
-                                    <a class="btn btn-sm btn-outline-primary" target="_blank" href="<?php echo base_url() . 'storage/registrations/' . $vehicle["registration_copy"] ?>">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
-                                <?php } ?>
-                            </td>
-                            <td><?php echo $vehicle["owner_name"] ?></td>
-                            <td><?php echo $vehicle["owner_phone"] ?></td>
-                            <td><?php echo $vehicle["bank_name"] ?></td>
-                            <td><?php echo $vehicle["bank_account_no"] ?></td>
-                            <td><?php echo $vehicle["bank_ifsc"] ?></td>
-                            <td><?php echo $vehicle["bank_branch_name"] ?></td>
-                            <td>
-                                <?php if($vehicle["owner_pan"]) { ?>
-                                    <a class="btn btn-sm btn-outline-primary" target="_blank" href="<?php echo base_url() . 'storage/pans/' . $vehicle["owner_pan"] ?>">
+                                <?php if($casher["pan"]) { ?>
+                                    <a class="btn btn-sm btn-outline-primary" target="_blank" href="<?php echo base_url() . 'storage/files/' . $casher["pan"] ?>">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 <?php } ?>
                             </td>
                             <td>
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a href="<?php echo base_url()?>vehicle/edit/<?php echo $vehicle["id"] ?>" class="btn btn-sm btn-outline-primary mx-1"><i class="fa fa-edit"></i></a>
-                                    <a href="<?php echo base_url()?>vehicle/delete/<?php echo $vehicle["id"] ?>" class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i></a>
-                                </div>
+                                <?php if($casher["aadhaar"]) { ?>
+                                    <a class="btn btn-sm btn-outline-primary" target="_blank" href="<?php echo base_url() . 'storage/files/' . $casher["aadhaar"] ?>">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                <?php } ?>
+                            </td>
+                            <td><?php echo $casher["bank_name"] ?></td>
+                            <td><?php echo $casher["bank_account_no"] ?></td>
+                            <td><?php echo $casher["bank_ifsc"] ?></td>
+                            <td><?php echo $casher["bank_branch_name"] ?></td>
+                            <td><?php echo number_format($casher["balance"],2) ?></td>
+                            <td>
+                                <a href="<?php echo base_url()?>casher/edit/<?php echo $casher["id"] ?>" class="btn btn-sm btn-outline-primary"><i class="fa fa-edit"></i></a>
+                                <a href="<?php echo base_url()?>casher/delete/<?php echo $casher["id"] ?>" class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                     <?php }  ?>
@@ -85,7 +84,7 @@
 
     async function loadData(limit, page) {
         event.preventDefault()
-        window.history.pushState({page}, "", `${base_url}vehicle/${limit}/${page}`)
+        window.history.pushState({page}, "", `${base_url}casher/${limit}/${page}`)
         window.location.reload()
     }
 </script>

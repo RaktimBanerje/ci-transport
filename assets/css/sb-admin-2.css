@@ -323,8 +323,8 @@ progress {
   vertical-align: baseline;
 }
 
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
+[type="text"]::-webkit-inner-spin-button,
+[type="text"]::-webkit-outer-spin-button {
   height: auto;
 }
 

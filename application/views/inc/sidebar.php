@@ -133,27 +133,110 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
-                <span>Fuel Department</span>
+                <span>Cash & Day Book</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
-                <ul class="navbar-nav sidebar accordion my-sidebar" id="accordionSidebar2" style="background-color: transparent !important; min-height: 0px; ">
+                <ul class="navbar-nav sidebar accordion my-sidebar" id="accordionSidebar1" style="background-color: transparent !important; min-height: 0px; ">
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwoOne" aria-expanded="true" aria-controls="collapseTwo">
                             <i class="fas fa-fw fa-cog"></i>
-                            <span>Pump</span>
+                            <span>Casher</span>
                         </a>
 
-                        <div id="collapseTwoOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar2">
+                        <div id="collapseTwoOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar1">
                             <div class="bg-white py-2 collapse-inner rounded">
-                                <a class="collapse-item" href="<?php echo base_url() ?>pump/create">Create Pump</a>
-                                <a class="collapse-item" href="<?php echo base_url() ?>pump">Pump List</a>
+                                <a class="collapse-item" href="<?php echo base_url() ?>casher/create">Create Casher</a>
+                                <a class="collapse-item" href="<?php echo base_url() ?>casher">Casher List</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwoTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-fw fa-cog"></i>
+                            <span>Cash In</span>
+                        </a>
+
+                        <div id="collapseTwoTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar1">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <a class="collapse-item" href="<?php echo base_url() ?>cash/create">Cash Entry</a>
+                                <a class="collapse-item" href="<?php echo base_url() ?>cash">Cash Entry Record</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwoThree" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-fw fa-cog"></i>
+                            <span>Client</span>
+                        </a>
+
+                        <div id="collapseTwoThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar1">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <a class="collapse-item" href="<?php echo base_url() ?>client/create">Create Client</a>
+                                <a class="collapse-item" href="<?php echo base_url() ?>client">Client List</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwoFour" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-fw fa-cog"></i>
+                            <span>Material</span>
+                        </a>
+
+                        <div id="collapseTwoFour" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar1">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <a class="collapse-item" href="<?php echo base_url() ?>material/create">Create Material</a>
+                                <a class="collapse-item" href="<?php echo base_url() ?>material">Material List</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwoFive" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-fw fa-cog"></i>
+                            <span>Order</span>
+                        </a>
+
+                        <div id="collapseTwoFive" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar1">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <a class="collapse-item" href="<?php echo base_url() ?>order/create">Create Order</a>
+                                <a class="collapse-item" href="<?php echo base_url() ?>order">Order List</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwoSix" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-fw fa-cog"></i>
+                            <span>Loading Point</span>
+                        </a>
+
+                        <div id="collapseTwoSix" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar1">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <a class="collapse-item" href="<?php echo base_url() ?>loading-point/create">Create Loading Point</a>
+                                <a class="collapse-item" href="<?php echo base_url() ?>loading-point">Loading Point List</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwoSeven" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-fw fa-cog"></i>
+                            <span>Unloading Point</span>
+                        </a>
+
+                        <div id="collapseTwoSeven" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar1">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <a class="collapse-item" href="<?php echo base_url() ?>unloading-point/create">Create Unloading Point</a>
+                                <a class="collapse-item" href="<?php echo base_url() ?>unloading-point">Unloading Point List</a>
                             </div>
                         </div>
                     </li>
                 </ul>
             </div>
         </li>
-
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
@@ -193,6 +276,48 @@
                 </ul>
             </div>
         </li>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Fuel Department</span>
+            </a>
+            <div id="collapseFour" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+                <ul class="navbar-nav sidebar accordion my-sidebar" id="accordionSidebar2" style="background-color: transparent !important; min-height: 0px; ">
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFourOne" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-fw fa-cog"></i>
+                            <span>Pump</span>
+                        </a>
+
+                        <div id="collapseFourOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar2">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <a class="collapse-item" href="<?php echo base_url() ?>pump/create">Create Pump</a>
+                                <a class="collapse-item" href="<?php echo base_url() ?>pump">Pump List</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFourTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-fw fa-cog"></i>
+                            <span>Payment</span>
+                        </a>
+
+                        <div id="collapseFourTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar2">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <a class="collapse-item" href="<?php echo base_url() ?>pump-payment/create">Payment Entry</a>
+                                <a class="collapse-item" href="<?php echo base_url() ?>pump-payment">Payment Record</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+
+
 
         <!-- Divider
         <hr class="sidebar-divider d-none d-md-block">

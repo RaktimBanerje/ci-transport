@@ -33,38 +33,62 @@
                         </div>
                     </div>
                     <div class="col-md-6"></div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="name">Broker: </label>
                             <select name="broker_id" type="text" class="form-control">
-                                <option value="">Please Select</option>
+                                <option value="">Select</option>
                                 <?php foreach($brokers as $broker) { ?>
                                     <option value="<?php echo $broker['id'] ?>" <?php if($broker['id'] == $material['broker_id']) {echo "selected";} ?>><?php echo $broker['name'] ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="address">Rate for Broker: </label>
-                            <input id="broker_rate" name="broker_rate" type="number" class="form-control" value="<?php echo $material['broker_rate'] ?>" />
+                            <input id="broker_rate" name="broker_rate" type="text" class="form-control" value="<?php echo $material['broker_rate'] ?>" />
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="address">From Date: </label>
+                            <input id="broker_from_date" name="broker_from_date" type="date" class="form-control" value="<?php echo $material['broker_from_date'] ?>" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="address">To Date: </label>
+                            <input id="broker_to_date" name="broker_to_date" type="date" class="form-control" value="<?php echo $material['broker_to_date'] ?>" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="name">Client: </label>
                             <select name="client_id" type="text" class="form-control">
-                                <option value="">Please Select</option>
+                                <option value="">Select</option>
                                 <?php foreach($clients as $client) { ?>
                                     <option value="<?php echo $client['id'] ?>" <?php if($client['id'] == $material['client_id']) {echo "selected";} ?>><?php echo $client['name'] ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="address">Rate for Client: </label>
-                            <input id="client_rate" name="client_rate" type="number" class="form-control" value="<?php echo $material['client_rate'] ?>"  />
+                            <input id="client_rate" name="client_rate" type="text" class="form-control" value="<?php echo $material['client_rate'] ?>"  />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="address">From Date: </label>
+                            <input id="client_from_date" name="client_from_date" type="date" class="form-control" value="<?php echo $material['client_from_date'] ?>" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="address">To Date: </label>
+                            <input id="client_to_date" name="client_to_date" type="date" class="form-control" value="<?php echo $material['client_to_date'] ?>" />
                         </div>
                     </div>
                 </div>

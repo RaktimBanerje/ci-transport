@@ -4,7 +4,7 @@
     <!-- Page Heading -->
     <div class="row">
         <div class="col-md-6">
-            <h1 class="h3 mb-4 text-gray-800">Edit Order</h1>
+            <h1 class="h3 mb-4 text-gray-800">Edit Cash Record</h1>
         </div>
         <div class="col-md-6">
             <?php if ($this->session->flashdata("success")) { ?>
@@ -24,40 +24,44 @@
 
     <div class="card card-flush">
         <div class="card-body">
-            <form action="<?php echo base_url() ?>order/update" method="POST" enctype="multipart/form-data">
+            <form action="<?php echo base_url() ?>cash/update" method="POST" enctype="multipart/form-data">
                 <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="order_name">Order Name: </label>
-                                <input id="name" name="name" type="text" class="form-control" value="<?php echo $order["name"] ?>" />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="client">Client: </label>
-                                <select class="form-control" name="client_id">
+                                <label for="name">Casher Name: </label>
+                                <select id="casher_id" name="casher_id" class="form-control">
                                     <option value="">Select</option>
-                                    <?php foreach($clients as $client) { ?>
-                                        <option value="<?php echo $client['id']?>" <?php if($client["id"] == $order["client_id"]) { echo "selected"; } ?>><?php echo $client['name']?></option>
+                                    <?php foreach($cashers as $casher) { ?>
+                                        <option value="<?php echo $casher['id']?>" <?php if($cash['casher_id'] == $casher['id']) {echo "selected";}?>><?php echo $casher['name'] ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="purchase_order_no">Purchase Order No: </label>
-                                <input id="purchase_order_no" name="purchase_order_no" type="text" class="form-control" value="<?php echo $order["purchase_order_no"] ?>" />
+                                <label for="amount">Amount: </label>
+                                <input id="amount" name="amount" type="text" class="form-control" value="<?php echo $cash["amount"] ?>" />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="purchase_order_date">Purchase Order Date: </label>
-                                <input id="purchase_order_date" name="purchase_order_date" type="date" class="form-control" value="<?php echo $order["purchase_order_date"] ?>" />
+                                <label for="payment_mode">Payment Mode: </label>
+                                <select class="form-control" name="payment_mode">
+                                    <option value="cash" <?php if($cash['payment_mode'] == "cash") {echo "selected";}?>>Cash</option>
+                                    <option value="bank" <?php if($cash['payment_mode'] == "bank") {echo "selected";}?>>Bank</option>
+                                    <option value="online" <?php if($cash['payment_mode'] == "online") {echo "selected";}?>>Online</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="remarks">Remarks: </label>
+                                <input id="remarks" name="remarks" type="text" class="form-control" value="<?php echo $cash['remarks'] ?>" />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="d-none" name="id" value="<?php echo $order["id"] ?>" />
+                                <input type="text" class="d-none" name="id" value="<?php echo $cash["id"] ?>" />
                                 <input type="submit" value="Save" class="btn btn-primary" />
                             </div>
                         </div>

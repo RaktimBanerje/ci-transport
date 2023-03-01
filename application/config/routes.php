@@ -137,6 +137,28 @@ $route["unloading/update"]["POST"] = "UnloadingController/update";
 $route["unloading/delete/(:any)"]["GET"] = "UnloadingController/delete/$1";
 $route["unloading/restore/(:any)"]["GET"] = "UnloadingController/restore/$1";
 
+// Casher Routes
+$route["casher(/:num)?(/:num)?"]["GET"] = "CasherController/index";
+$route["casher/paginate(/:any)(/:num)"]["GET"] = "CasherController/paginate";
+$route["casher/create"]["GET"] = "CasherController/create";
+$route["casher/store"]["POST"] = "CasherController/store";
+$route["casher/show/(:any)"]["GET"] = "CasherController/show/$1";
+$route["casher/edit/(:any)"]["GET"] = "CasherController/edit/$1";
+$route["casher/update"]["POST"] = "CasherController/update";
+$route["casher/delete/(:any)"]["GET"] = "CasherController/delete/$1";
+$route["casher/restore/(:any)"]["GET"] = "CasherController/restore/$1";
+
+// Cash Routes
+$route["cash(/:num)?(/:num)?"]["GET"] = "CashController/index";
+$route["cash/paginate(/:any)(/:num)"]["GET"] = "CashController/paginate";
+$route["cash/create"]["GET"] = "CashController/create";
+$route["cash/store"]["POST"] = "CashController/store";
+$route["cash/show/(:any)"]["GET"] = "CashController/show/$1";
+$route["cash/edit/(:any)"]["GET"] = "CashController/edit/$1";
+$route["cash/update"]["POST"] = "CashController/update";
+$route["cash/delete/(:any)"]["GET"] = "CashController/delete/$1";
+$route["cash/restore/(:any)"]["GET"] = "CashController/restore/$1";
+
 // Pump Routes
 $route["pump(/:num)?(/:num)?"]["GET"] = "PumpController/index";
 $route["pump/paginate(/:any)(/:num)"]["GET"] = "PumpController/paginate";
@@ -147,6 +169,17 @@ $route["pump/edit/(:any)"]["GET"] = "PumpController/edit/$1";
 $route["pump/update"]["POST"] = "PumpController/update";
 $route["pump/delete/(:any)"]["GET"] = "PumpController/delete/$1";
 $route["pump/restore/(:any)"]["GET"] = "PumpController/restore/$1";
+
+// Pump Payment Routes
+$route["pump-payment(/:num)?(/:num)?"]["GET"] = "PumpPaymentController/index";
+$route["pump-payment/paginate(/:any)(/:num)"]["GET"] = "PumpPaymentController/paginate";
+$route["pump-payment/create"]["GET"] = "PumpPaymentController/create";
+$route["pump-payment/store"]["POST"] = "PumpPaymentController/store";
+$route["pump-payment/show/(:any)"]["GET"] = "PumpPaymentController/show/$1";
+$route["pump-payment/edit/(:any)"]["GET"] = "PumpPaymentController/edit/$1";
+$route["pump-payment/update"]["POST"] = "PumpPaymentController/update";
+$route["pump-payment/delete/(:any)"]["GET"] = "PumpPaymentController/delete/$1";
+$route["pump-payment/restore/(:any)"]["GET"] = "PumpPaymentController/restore/$1";
 
 // Order Routes
 $route["order(/:num)?(/:num)?"]["GET"] = "OrderController/index";

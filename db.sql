@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 18, 2023 at 01:02 PM
+-- Generation Time: Mar 01, 2023 at 02:56 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -81,6 +81,36 @@ CREATE TABLE `cashers` (
   `deleted_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `cashers`
+--
+
+INSERT INTO `cashers` (`id`, `name`, `address`, `phone_no`, `pan`, `aadhaar`, `bank_name`, `bank_account_no`, `bank_ifsc`, `bank_branch_name`, `deleted`, `deleted_at`) VALUES
+(1, 'Giselle Bernard', 'Bianca Sykes', '+1 (827) 917-2115', '1677666574.pdf', '16776665741.pdf', 'Kitra Cunningham', 'Cum cumque odio eius', 'Dolore et laudantium', 'Catherine Solomon', 0, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cashes`
+--
+
+CREATE TABLE `cashes` (
+  `id` int(11) NOT NULL,
+  `casher_id` int(11) DEFAULT NULL,
+  `amount` float DEFAULT NULL,
+  `payment_mode` text DEFAULT NULL,
+  `remarks` text DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT 0,
+  `deleted_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cashes`
+--
+
+INSERT INTO `cashes` (`id`, `casher_id`, `amount`, `payment_mode`, `remarks`, `deleted`, `deleted_at`) VALUES
+(1, 1, 16.65, 'bank', 'Earum omnis debitis ', 0, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -150,7 +180,9 @@ INSERT INTO `loadings` (`id`, `broker_id`, `loading_date`, `vehicle_id`, `fright
 (1, 11, '2012-03-12', 0, 'Velit sunt iste cum', 'Omnis est explicabo', 8.00, 0, 642.00, 'Do veritatis rem tem', 2.00, 56.00, '0', 0.00, 65.00, 9.00, 0, NULL),
 (2, 6, '2019-03-13', 0, 'Quos quae quia ea mo', 'Amet non explicabo', 82.00, 0, 409.00, 'Amet consequatur I', 99.00, 74.00, '0', 0.00, 3.00, 55.00, 0, NULL),
 (3, 12, '2017-05-22', 0, 'Dolores quisquam sap', 'Ipsa numquam quibus', 31.00, 0, 675.00, 'Sed eum aut ut totam', 84.00, 35.00, '0', 0.00, 84.00, 33.00, 0, NULL),
-(4, 11, '1988-05-05', 8, 'Magnam suscipit debi', 'Labore illum cillum', 5.00, 4, 58.00, 'Atque neque quia inc', 12.00, 68.00, 'OFHJFIUDGJSFINPIPAFS', 0.00, 32.00, 73.00, 0, NULL);
+(4, 11, '1988-05-05', 8, 'Magnam suscipit debi', 'Labore illum cillum', 5.00, 4, 58.00, 'Atque neque quia inc', 12.00, 68.00, 'OFHJFIUDGJSFINPIPAFS', 0.00, 32.00, 73.00, 0, NULL),
+(5, 4, '2013-06-17', 9, 'Molestias corrupti', 'Impedit repudiandae', 0.00, 7, 863.00, 'Sit quis et accusan', 0.00, 0.00, 'Aut cupiditate qui v', 0.00, 0.00, 0.00, 0, NULL),
+(6, 11, '1980-08-02', 10, 'Odit omnis adipisci', 'Mollit necessitatibu', 0.00, 7, 683.00, 'Laborum nihil nemo s', 0.00, 0.00, 'Nihil earum labore n', 98.00, 45.00, 85.00, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -186,8 +218,12 @@ CREATE TABLE `materials` (
   `name` text DEFAULT NULL,
   `broker_id` int(11) DEFAULT NULL,
   `broker_rate` float DEFAULT NULL,
+  `broker_from_date` date DEFAULT NULL,
+  `broker_to_date` date DEFAULT NULL,
   `client_id` int(11) DEFAULT NULL,
   `client_rate` int(11) DEFAULT NULL,
+  `client_from_date` date DEFAULT NULL,
+  `client_to_date` date DEFAULT NULL,
   `deleted` tinyint(1) DEFAULT 0,
   `deleted_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -196,10 +232,8 @@ CREATE TABLE `materials` (
 -- Dumping data for table `materials`
 --
 
-INSERT INTO `materials` (`id`, `name`, `broker_id`, `broker_rate`, `client_id`, `client_rate`, `deleted`, `deleted_at`) VALUES
-(4, 'Krishna Banerjee', 4, 100, 5, 101, 0, NULL),
-(5, 'Sigourney Vinson', 4, 200, 9, 224, 0, NULL),
-(6, '', 6, 0, 0, 0, 0, NULL);
+INSERT INTO `materials` (`id`, `name`, `broker_id`, `broker_rate`, `broker_from_date`, `broker_to_date`, `client_id`, `client_rate`, `client_from_date`, `client_to_date`, `deleted`, `deleted_at`) VALUES
+(7, 'Chantale Newman', 4, 11, '1996-05-09', '1998-08-13', 9, 44, '2009-10-27', '1989-04-02', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -272,7 +306,30 @@ CREATE TABLE `pumps` (
 --
 
 INSERT INTO `pumps` (`id`, `name`, `phone_no`, `address`, `gst_no`, `bank_name`, `bank_account_no`, `bank_ifsc`, `bank_branch_name`, `deleted`, `deleted_at`) VALUES
-(1, 'Walker Mcintosh', '+1 (735) 697-1866', 'Zena Higgins', 'Officia ut minima se', 'Phillip Fisher', 'Repellendus Eum vol', 'Consectetur reprehen', 'Cathleen Lang', 1, '2023-02-18 13:35:00');
+(1, 'Walker Mcintosh', '+1 (735) 697-1866', 'Zena Higgins', 'Officia ut minima se', 'Phillip Fisher', 'Repellendus Eum vol', 'Consectetur reprehen', 'Cathleen Lang', 0, '2023-02-18 13:35:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pump_payments`
+--
+
+CREATE TABLE `pump_payments` (
+  `id` int(11) NOT NULL,
+  `pump_id` int(11) DEFAULT NULL,
+  `amount` float DEFAULT NULL,
+  `payment_mode` text DEFAULT NULL,
+  `remarks` text DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT 0,
+  `deleted_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pump_payments`
+--
+
+INSERT INTO `pump_payments` (`id`, `pump_id`, `amount`, `payment_mode`, `remarks`, `deleted`, `deleted_at`) VALUES
+(1, 1, 98, 'cash', 'asdsfsa', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -326,9 +383,14 @@ CREATE TABLE `vehicles` (
   `id` int(11) NOT NULL,
   `registration_no` text DEFAULT NULL,
   `registration_copy` text DEFAULT NULL,
+  `wheel_type` text DEFAULT NULL,
   `owner_name` text DEFAULT NULL,
   `owner_phone` text DEFAULT NULL,
   `owner_pan` text DEFAULT NULL,
+  `bank_name` text DEFAULT NULL,
+  `bank_account_no` text DEFAULT NULL,
+  `bank_ifsc` text DEFAULT NULL,
+  `bank_branch_name` text DEFAULT NULL,
   `deleted` tinyint(1) DEFAULT 0,
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -337,8 +399,10 @@ CREATE TABLE `vehicles` (
 -- Dumping data for table `vehicles`
 --
 
-INSERT INTO `vehicles` (`id`, `registration_no`, `registration_copy`, `owner_name`, `owner_phone`, `owner_pan`, `deleted`, `deleted_at`) VALUES
-(8, '876541234897', NULL, 'Branden Levy', '+1 (715) 866-3153', NULL, 0, NULL);
+INSERT INTO `vehicles` (`id`, `registration_no`, `registration_copy`, `wheel_type`, `owner_name`, `owner_phone`, `owner_pan`, `bank_name`, `bank_account_no`, `bank_ifsc`, `bank_branch_name`, `deleted`, `deleted_at`) VALUES
+(8, '876541234897', NULL, NULL, 'Branden Levy', '+1 (715) 866-3153', NULL, '0', '0', '0', '0', 0, NULL),
+(9, 'Laboris sit ex id', NULL, 'At rerum consequat', 'Shelby Spears', '+1 (188) 177-9183', NULL, 'Alice Mcpherson', 'Molestiae a est mol', 'Et incidunt ut sed', 'Moana Small', 0, NULL),
+(10, 'OMNIS EVENIET QUAER', '1676784506.pdf', 'ODIO QUO DOLOR OFFIC', 'ZACHARY MILES', '+1 (409) 228-5488', '1676784506.pdf', 'HU GALLEGOS', 'LABORE ET EX QUAS RE', 'DOLORE EXPEDITA VELI', 'DESTINY SCOTT', 0, NULL);
 
 --
 -- Indexes for dumped tables
@@ -354,6 +418,12 @@ ALTER TABLE `brokers`
 -- Indexes for table `cashers`
 --
 ALTER TABLE `cashers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cashes`
+--
+ALTER TABLE `cashes`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -401,6 +471,12 @@ ALTER TABLE `pumps`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `pump_payments`
+--
+ALTER TABLE `pump_payments`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `unloading_points`
 --
 ALTER TABLE `unloading_points`
@@ -434,7 +510,13 @@ ALTER TABLE `brokers`
 -- AUTO_INCREMENT for table `cashers`
 --
 ALTER TABLE `cashers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `cashes`
+--
+ALTER TABLE `cashes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `clients`
@@ -446,7 +528,7 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT for table `loadings`
 --
 ALTER TABLE `loadings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `loading_points`
@@ -458,7 +540,7 @@ ALTER TABLE `loading_points`
 -- AUTO_INCREMENT for table `materials`
 --
 ALTER TABLE `materials`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -479,6 +561,12 @@ ALTER TABLE `pumps`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `pump_payments`
+--
+ALTER TABLE `pump_payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `unloading_points`
 --
 ALTER TABLE `unloading_points`
@@ -494,7 +582,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `vehicles`
 --
 ALTER TABLE `vehicles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 

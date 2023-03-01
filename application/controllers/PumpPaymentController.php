@@ -1,14 +1,13 @@
 <?php 
     defined('BASEPATH') OR exit('No direct script access allowed');
 
-    class MaterialController extends CI_Controller {
+    class PumpPaymentController extends CI_Controller {
         public function __construct() {
             parent::__construct();
 
             $this->config->load('pagination', TRUE);
-            $this->load->model("Material");
-            $this->load->model("Broker");
-            $this->load->model("Client");
+            $this->load->model("Pump");
+            $this->load->model("PumpPayment");
         }
 
         public function index() {
@@ -17,8 +16,8 @@
             }
 
             $pagination = $this->config->item('pagination');
-            $pagination["base_url"] = base_url().'material';
-            $pagination["total_rows"] = count($this->Material->get());
+            $pagination["base_url"] = base_url().'pump-payment';
+            $pagination["total_rows"] = count($this->PumpPayment->get());
             $pagination["per_page"] = $this->uri->segment(2)? $this->uri->segment(2) : 10;
             $this->pagination->initialize($pagination);
 
@@ -27,12 +26,12 @@
 
             $data = array(
                 'pagination_link'  => $this->pagination->create_links(),
-                'materials'   => $this->Material->get(NULL, $pagination["per_page"], $start),
+                'pump_payments'   => $this->PumpPayment->get(NULL, $pagination["per_page"], $start),
                 'limit' => $pagination["per_page"],
             );
 
             $this->load->view("inc/header");
-            $this->load->view("Material/index", $data);
+            $this->load->view("PumpPayment/index", $data);
             $this->load->view("inc/footer");
         }
 
@@ -42,9 +41,9 @@
             }
 
             $pagination = $this->config->item('pagination');
-            $pagination["base_url"] = base_url().'material';
+            $pagination["base_url"] = base_url().'pump-payment';
             $pagination["uri_segment"] = 4;
-            $pagination["total_rows"] = count($this->Material->get());
+            $pagination["total_rows"] = count($this->PumpPayment->get());
             $pagination["per_page"] = $this->uri->segment(3)? (int)$this->uri->segment(3) : 10;
             $this->pagination->initialize($pagination);
 
@@ -53,7 +52,7 @@
 
             $data = array(
                 'pagination_link'  => $this->pagination->create_links(),
-                'materials'   => $this->Material->get(NULL, $pagination["per_page"], $start),
+                'pump_payments'   => $this->PumpPayment->get(NULL, $pagination["per_page"], $start),
             );
 
             header("content-type: application/json");
@@ -67,12 +66,11 @@
             }
 
             $data = [
-                "brokers" => $this->Broker->get(),
-                "clients" => $this->Client->get()
+                "pumps" => $this->Pump->get()
             ];
 
             $this->load->view("inc/header");
-            $this->load->view("Material/create", $data);
+            $this->load->view("PumpPayment/create", $data);
             $this->load->view("inc/footer");
         }
 
@@ -81,10 +79,11 @@
                 return redirect(base_url());
             }
 
-            $this->Material->insert($_POST);
+
+            $this->PumpPayment->insert($_POST);
 
             $this->session->set_flashdata("success", "New record inserted");;
-            return redirect(base_url() . "material/create");
+            return redirect(base_url() . "pump-payment/create");
         }
 
         public function show($id) {
@@ -94,9 +93,9 @@
         
             header("content-type: application/json");
 
-            $material = $this->Material->get($id);
+            $pump_payment = $this->PumpPayment->get($id);
 
-            echo json_encode($material);
+            echo json_encode($pump_payment);
         }
 
         public function edit($id) {
@@ -105,13 +104,12 @@
             }
 
             $data = [
-                "brokers" => $this->Broker->get(),
-                "clients" => $this->Client->get(),
-                "material" => $this->Material->get($id)
+                "pumps" => $this->Pump->get(),
+                "payment" => $this->PumpPayment->get($id)
             ];
 
             $this->load->view("inc/header");
-            $this->load->view("Material/edit", $data);
+            $this->load->view("PumpPayment/edit", $data);
             $this->load->view("inc/footer");
         }
 
@@ -121,11 +119,11 @@
             }
 
             $id = trim($this->input->post("id"));
-
-            $this->Material->Update($id, $_POST);
+            
+            $this->PumpPayment->Update($id, $_POST);
 
             $this->session->set_flashdata("success", "Record updated");
-            return redirect(base_url() . "material");
+            return redirect(base_url() . "pump-payment");
             
         }
 
@@ -134,20 +132,54 @@
                 return redirect(base_url());
             }          
             
-            $this->Material->delete($id, date("Y-m-d H:i", time()));
+            $this->PumpPayment->delete($id, date("Y-m-d H:i", time()));
 
             $this->session->set_flashdata("success", "Record deleted");
-            return redirect(base_url() . "material");
+            return redirect(base_url() . "pump-payment");
         }
 
         public function restore($id) {
             if(!$this->session->user) {
-                return redirect(base_url() . "material");
+                return redirect(base_url() . "pump-payment");
             }          
             
-            $this->Material->restore($id);
+            $this->PumpPayment->restore($id);
 
             $this->session->set_flashdata("success", "Record restored");;
-            return redirect(base_url() . "material");
+            return redirect(base_url() . "pump-payment");
+        }
+
+        protected function upload_file($path, $file, $new_file_name){
+            $config['upload_path']          = $path;
+            $config['allowed_types']        = 'jpg|jpeg|png|pdf';
+            $config['file_name']            = $new_file_name; 
+    
+            $this->load->library('upload');
+            $this->upload->initialize($config);
+    
+            if ($this->upload->do_upload($file))
+            {
+                return array(
+                    'status' => true,
+                    'upload_data' => $this->upload->data()
+                );                
+            }
+            else
+            {
+                return array(
+                    'status' => false,
+                    'error' => $this->upload->display_errors()
+                );    
+            }
+        }
+
+        protected function delete_file($file){
+            if (file_exists($file)) {
+                unlink($file);
+                return true;
+            } 
+            else {
+                return false;
+            }
         }
     }
