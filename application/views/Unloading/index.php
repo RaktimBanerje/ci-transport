@@ -4,7 +4,7 @@
     <!-- Page Heading -->
     <div class="row">
         <div class="col-md-6">
-            <h1 class="h3 mb-4 text-gray-800">Loading Records</h1>
+            <h1 class="h3 mb-4 text-gray-800">Unloading Records</h1>
         </div>
         <div class="col-md-6">
             <?php if ($this->session->flashdata("success")) { ?>
@@ -39,6 +39,7 @@
 
                             <th data-resizable-column-id="loading_point">Loading Point</th>
                             <th data-resizable-column-id="cash_advance">Cash Advance</th>
+                            <th data-resizable-column-id="bank_advance">Bank Advance</th>
                             <th data-resizable-column-id="pump_id">Pump</th>
                             <th data-resizable-column-id="diesal_advance_amount">Diesal Advance Amount</th>
                             <th data-resizable-column-id="broker_advance">Broker Advance</th>
@@ -60,7 +61,8 @@
                                 <td><?php echo $loading["price"] ?></td>
                                 <td><?php echo $loading["loading_point"] ?></td>
                                 <td><?php echo $loading["cash_advance"] ?></td>
-                                <td><?php echo $loading["pump"] ?></td>
+                                <td><?php echo $loading["bank_advance"] ?></td>
+                                <td><?php echo $loading["pump_id"] ?></td>
                                 <td><?php echo $loading["diesal_advance_amount"] ?></td>
                                 <td><?php echo $loading["broker_advance"] ?></td>
                                 <td><?php echo $loading["driver_commission"] ?></td>

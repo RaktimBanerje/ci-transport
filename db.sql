@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2023 at 02:56 PM
+-- Generation Time: Mar 03, 2023 at 03:56 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -161,10 +161,9 @@ CREATE TABLE `loadings` (
   `loading_qun` float(11,2) DEFAULT NULL,
   `material_id` int(11) DEFAULT NULL,
   `price` float(11,2) DEFAULT NULL,
-  `loading_point` text DEFAULT NULL,
+  `loading_point_id` int(11) DEFAULT NULL,
   `cash_advance` float(11,2) DEFAULT NULL,
-  `bank_advance` float(11,2) DEFAULT NULL,
-  `pump_id` text DEFAULT NULL,
+  `pump_id` int(11) DEFAULT NULL,
   `diesal_advance_amount` float(11,2) DEFAULT NULL,
   `broker_advance` float(11,2) DEFAULT NULL,
   `driver_commission` float(11,2) DEFAULT NULL,
@@ -176,13 +175,9 @@ CREATE TABLE `loadings` (
 -- Dumping data for table `loadings`
 --
 
-INSERT INTO `loadings` (`id`, `broker_id`, `loading_date`, `vehicle_id`, `fright_slip_no`, `challan_no`, `loading_qun`, `material_id`, `price`, `loading_point`, `cash_advance`, `bank_advance`, `pump_id`, `diesal_advance_amount`, `broker_advance`, `driver_commission`, `deleted`, `deleted_at`) VALUES
-(1, 11, '2012-03-12', 0, 'Velit sunt iste cum', 'Omnis est explicabo', 8.00, 0, 642.00, 'Do veritatis rem tem', 2.00, 56.00, '0', 0.00, 65.00, 9.00, 0, NULL),
-(2, 6, '2019-03-13', 0, 'Quos quae quia ea mo', 'Amet non explicabo', 82.00, 0, 409.00, 'Amet consequatur I', 99.00, 74.00, '0', 0.00, 3.00, 55.00, 0, NULL),
-(3, 12, '2017-05-22', 0, 'Dolores quisquam sap', 'Ipsa numquam quibus', 31.00, 0, 675.00, 'Sed eum aut ut totam', 84.00, 35.00, '0', 0.00, 84.00, 33.00, 0, NULL),
-(4, 11, '1988-05-05', 8, 'Magnam suscipit debi', 'Labore illum cillum', 5.00, 4, 58.00, 'Atque neque quia inc', 12.00, 68.00, 'OFHJFIUDGJSFINPIPAFS', 0.00, 32.00, 73.00, 0, NULL),
-(5, 4, '2013-06-17', 9, 'Molestias corrupti', 'Impedit repudiandae', 0.00, 7, 863.00, 'Sit quis et accusan', 0.00, 0.00, 'Aut cupiditate qui v', 0.00, 0.00, 0.00, 0, NULL),
-(6, 11, '1980-08-02', 10, 'Odit omnis adipisci', 'Mollit necessitatibu', 0.00, 7, 683.00, 'Laborum nihil nemo s', 0.00, 0.00, 'Nihil earum labore n', 98.00, 45.00, 85.00, 0, NULL);
+INSERT INTO `loadings` (`id`, `broker_id`, `loading_date`, `vehicle_id`, `fright_slip_no`, `challan_no`, `loading_qun`, `material_id`, `price`, `loading_point_id`, `cash_advance`, `pump_id`, `diesal_advance_amount`, `broker_advance`, `driver_commission`, `deleted`, `deleted_at`) VALUES
+(8, 4, '2023-03-03', 10, 'Tempor distinctio R', '123456789', 0.00, 7, 11.00, 3, 0.00, 1, 0.00, 0.00, 0.00, 0, NULL),
+(9, 4, '2023-03-01', 8, 'Voluptas aut labore', '321654987', 98.00, 7, 0.00, 1, 45.00, 1, 100.00, 400.00, 300.00, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -233,7 +228,7 @@ CREATE TABLE `materials` (
 --
 
 INSERT INTO `materials` (`id`, `name`, `broker_id`, `broker_rate`, `broker_from_date`, `broker_to_date`, `client_id`, `client_rate`, `client_from_date`, `client_to_date`, `deleted`, `deleted_at`) VALUES
-(7, 'Chantale Newman', 4, 11, '1996-05-09', '1998-08-13', 9, 44, '2009-10-27', '1989-04-02', 0, NULL);
+(7, 'Chantale Newman', 4, 11, '2023-03-01', '2023-03-03', 9, 44, '2009-10-27', '1989-04-02', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -334,6 +329,25 @@ INSERT INTO `pump_payments` (`id`, `pump_id`, `amount`, `payment_mode`, `remarks
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `unloadings`
+--
+
+CREATE TABLE `unloadings` (
+  `id` int(11) NOT NULL,
+  `loading_id` int(11) DEFAULT NULL,
+  `challan_record` text DEFAULT NULL,
+  `unloading_date` date DEFAULT NULL,
+  `unloading_point_id` int(11) DEFAULT NULL,
+  `unloading_quantity` float DEFAULT NULL,
+  `shortage_quantity` float DEFAULT NULL,
+  `shortage_value` float DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT 0,
+  `deleted_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `unloading_points`
 --
 
@@ -401,8 +415,8 @@ CREATE TABLE `vehicles` (
 
 INSERT INTO `vehicles` (`id`, `registration_no`, `registration_copy`, `wheel_type`, `owner_name`, `owner_phone`, `owner_pan`, `bank_name`, `bank_account_no`, `bank_ifsc`, `bank_branch_name`, `deleted`, `deleted_at`) VALUES
 (8, '876541234897', NULL, NULL, 'Branden Levy', '+1 (715) 866-3153', NULL, '0', '0', '0', '0', 0, NULL),
-(9, 'Laboris sit ex id', NULL, 'At rerum consequat', 'Shelby Spears', '+1 (188) 177-9183', NULL, 'Alice Mcpherson', 'Molestiae a est mol', 'Et incidunt ut sed', 'Moana Small', 0, NULL),
-(10, 'OMNIS EVENIET QUAER', '1676784506.pdf', 'ODIO QUO DOLOR OFFIC', 'ZACHARY MILES', '+1 (409) 228-5488', '1676784506.pdf', 'HU GALLEGOS', 'LABORE ET EX QUAS RE', 'DOLORE EXPEDITA VELI', 'DESTINY SCOTT', 0, NULL);
+(9, '987455648751', NULL, 'AT RERUM CONSEQUAT', 'SHELBY SPEARS', '+1 (188) 177-9183', NULL, 'ALICE MCPHERSON', 'MOLESTIAE A EST MOL', 'ET INCIDUNT UT SED', 'MOANA SMALL', 0, NULL),
+(10, '789456123598', '1676784506.pdf', 'ODIO QUO DOLOR OFFIC', 'ZACHARY MILES', '+1 (409) 228-5488', '1676784506.pdf', 'HU GALLEGOS', 'LABORE ET EX QUAS RE', 'DOLORE EXPEDITA VELI', 'DESTINY SCOTT', 0, NULL);
 
 --
 -- Indexes for dumped tables
@@ -477,6 +491,12 @@ ALTER TABLE `pump_payments`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `unloadings`
+--
+ALTER TABLE `unloadings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `unloading_points`
 --
 ALTER TABLE `unloading_points`
@@ -528,7 +548,7 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT for table `loadings`
 --
 ALTER TABLE `loadings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `loading_points`
@@ -565,6 +585,12 @@ ALTER TABLE `pumps`
 --
 ALTER TABLE `pump_payments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `unloadings`
+--
+ALTER TABLE `unloadings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `unloading_points`

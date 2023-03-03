@@ -164,76 +164,6 @@
                             </div>
                         </div>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwoThree" aria-expanded="true" aria-controls="collapseTwo">
-                            <i class="fas fa-fw fa-cog"></i>
-                            <span>Client</span>
-                        </a>
-
-                        <div id="collapseTwoThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar1">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <a class="collapse-item" href="<?php echo base_url() ?>client/create">Create Client</a>
-                                <a class="collapse-item" href="<?php echo base_url() ?>client">Client List</a>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwoFour" aria-expanded="true" aria-controls="collapseTwo">
-                            <i class="fas fa-fw fa-cog"></i>
-                            <span>Material</span>
-                        </a>
-
-                        <div id="collapseTwoFour" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar1">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <a class="collapse-item" href="<?php echo base_url() ?>material/create">Create Material</a>
-                                <a class="collapse-item" href="<?php echo base_url() ?>material">Material List</a>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwoFive" aria-expanded="true" aria-controls="collapseTwo">
-                            <i class="fas fa-fw fa-cog"></i>
-                            <span>Order</span>
-                        </a>
-
-                        <div id="collapseTwoFive" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar1">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <a class="collapse-item" href="<?php echo base_url() ?>order/create">Create Order</a>
-                                <a class="collapse-item" href="<?php echo base_url() ?>order">Order List</a>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwoSix" aria-expanded="true" aria-controls="collapseTwo">
-                            <i class="fas fa-fw fa-cog"></i>
-                            <span>Loading Point</span>
-                        </a>
-
-                        <div id="collapseTwoSix" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar1">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <a class="collapse-item" href="<?php echo base_url() ?>loading-point/create">Create Loading Point</a>
-                                <a class="collapse-item" href="<?php echo base_url() ?>loading-point">Loading Point List</a>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwoSeven" aria-expanded="true" aria-controls="collapseTwo">
-                            <i class="fas fa-fw fa-cog"></i>
-                            <span>Unloading Point</span>
-                        </a>
-
-                        <div id="collapseTwoSeven" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar1">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <a class="collapse-item" href="<?php echo base_url() ?>unloading-point/create">Create Unloading Point</a>
-                                <a class="collapse-item" href="<?php echo base_url() ?>unloading-point">Unloading Point List</a>
-                            </div>
-                        </div>
-                    </li>
                 </ul>
             </div>
         </li>
@@ -254,8 +184,8 @@
 
                         <div id="collapseThreeOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar1">
                             <div class="bg-white py-2 collapse-inner rounded">
-                                <a class="collapse-item" href="<?php echo base_url() ?>loading/create">Per Day Loading</a>
-                                <a class="collapse-item" href="<?php echo base_url() ?>loading">View Loading</a>
+                                <a class="collapse-item" href="<?php echo base_url() ?>loading/create">Loading Entry</a>
+                                <a class="collapse-item" href="<?php echo base_url() ?>loading">Loading Records</a>
                             </div>
                         </div>
                     </li>
@@ -268,8 +198,8 @@
 
                         <div id="collapseThreeTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar1">
                             <div class="bg-white py-2 collapse-inner rounded">
-                                <a class="collapse-item" href="<?php echo base_url() ?>unloading/create">Unloading</a>
-                                <a class="collapse-item" href="<?php echo base_url() ?>unloading">View Unloading</a>
+                                <a class="collapse-item" href="<?php echo base_url() ?>unloading/create">Unloading Entry</a>
+                                <a class="collapse-item" href="<?php echo base_url() ?>unloading">Unloading Records</a>
                             </div>
                         </div>
                     </li>

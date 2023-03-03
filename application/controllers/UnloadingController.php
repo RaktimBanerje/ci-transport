@@ -1,17 +1,17 @@
 <?php 
     defined('BASEPATH') OR exit('No direct script access allowed');
 
-    class LoadingController extends CI_Controller {
+    class UnloadingController extends CI_Controller {
         public function __construct() {
             parent::__construct();
 
             $this->config->load('pagination', TRUE);
-            $this->load->model("LoadingPoint");
             $this->load->model("Loading");
+            $this->load->model("Unloading");
+            $this->load->model("UnloadingPoint");
             $this->load->model("Broker");
             $this->load->model("Vehicle");
             $this->load->model("Material");
-            $this->load->model("Pump");
         }
 
         public function index() {
@@ -70,15 +70,11 @@
             }
 
             $data = [
-                "loading_points" => $this->LoadingPoint->get(),
-                "pumps" => $this->Pump->get(),
-                "brokers" => $this->Broker->get(),
                 "vehicles" => $this->Vehicle->get(),
-                "materils" => $this->Material->get()
             ];
 
             $this->load->view("inc/header");
-            $this->load->view("Loading/create", $data);
+            $this->load->view("Unloading/create", $data);
             $this->load->view("inc/footer");
         }
 
@@ -87,29 +83,17 @@
                 return redirect(base_url());
             }
 
-            $data = [
-                "broker_id" => trim($this->input->post("broker_id")),
-                "loading_date" => trim($this->input->post("loading_date")),
-                "vehicle_id" => trim($this->input->post("vehicle_id")),
-                "fright_slip_no " => trim($this->input->post("fright_slip_no")),
-                "challan_no" => trim($this->input->post("challan_no")),
-                
-                "loading_qun" => trim($this->input->post("loading_qun")),
-                "material_id" => trim($this->input->post("material_id")),
-                "price" => trim($this->input->post("price")),
-                "loading_point_id" => trim($this->input->post("loading_point_id")),
-                "cash_advance" => trim($this->input->post("cash_advance")),
+            // $_POST["unloading_date"] = date('Y-m-d', $_POST['unloading_date']);
 
-                "pump_id" => trim($this->input->post("pump_id")),
-                "diesal_advance_amount" => trim($this->input->post("diesal_advance_amount")),
-                "broker_advance " => trim($this->input->post("broker_advance")),
-                "driver_commission" => trim($this->input->post("driver_commission")),
-            ];
+            $challan_record = $this->upload_file("storage/files", "challan_record", time());
+            if($challan_record["status"] == true) {
+                $_POST["challan_record"] = $challan_record['upload_data']['file_name'];
+            }
 
-            $this->Loading->insert($data);
+            $this->Unloading->insert($_POST);
 
             $this->session->set_flashdata("success", "New record inserted");;
-            return redirect(base_url() . "loading/create");
+            return redirect(base_url() . "unloading/create");
         }
 
         public function show($id) {
@@ -130,30 +114,15 @@
             }
 
             $data = [
-                "loading_points" => $this->LoadingPoint->get(),
-                "pumps" => $this->Pump->get(),
                 "brokers" => $this->Broker->get(),
-                "vehicles" => $this->Vehicle->get(),
-                "materils" => $this->Material->get(),
-                "loading" => $this->Loading->get($id),
+                "clients" => $this->Client->get(),
+                "loading" => $this->Loading->get($id)
             ];
 
             $this->load->view("inc/header");
             $this->load->view("Loading/edit", $data);
             $this->load->view("inc/footer");
         }
-
-
-        public function get_broker_rate() {
-            $broker_id = $this->input->get('broker_id');
-            $loading_date = $this->input->get("loading_date");
-
-            $record = $this->Loading->get_broker_rate($broker_id, $loading_date);
-
-            header('Content-Type: application/json; charset=utf-8');
-            echo json_encode($record);
-        }
-
 
         public function update() {
             if(!$this->session->user) {
@@ -162,30 +131,25 @@
 
             $id = trim($this->input->post("id"));
             
-            $data = [
-                "broker_id" => trim($this->input->post("broker_id")),
-                "loading_date" => trim($this->input->post("loading_date")),
-                "vehicle_id" => trim($this->input->post("vehicle_id")),
-                "fright_slip_no " => trim($this->input->post("fright_slip_no")),
-                "challan_no" => trim($this->input->post("challan_no")),
-                
-                "loading_qun" => trim($this->input->post("loading_qun")),
-                "material_id" => trim($this->input->post("material_id")),
-                "price" => trim($this->input->post("price")),
-                "loading_point_id" => trim($this->input->post("loading_point_id")),
-                "cash_advance" => trim($this->input->post("cash_advance")),
-
-                "pump_id" => trim($this->input->post("pump_id")),
-                "diesal_advance_amount" => trim($this->input->post("diesal_advance_amount")),
-                "broker_advance " => trim($this->input->post("broker_advance")),
-                "driver_commission" => trim($this->input->post("driver_commission")),
-            ];
-
-            $this->Loading->Update($id, $data);
+            $this->Loading->Update($id, $_POST);
 
             $this->session->set_flashdata("success", "Record updated");
             return redirect(base_url() . "loading");
             
+        }
+
+        public function get_loading_details() {
+            $vehicle_id = $this->input->get("vehicle_id");
+            
+            $data = [
+                "vehicles" => $this->Vehicle->get(),
+                "unloading_points" => $this->UnloadingPoint->get(),
+                "records" => $this->Unloading->get_loading_records($vehicle_id)
+            ];
+
+            $this->load->view("inc/header");
+            $this->load->view("Unloading/create", $data);
+            $this->load->view("inc/footer");
         }
 
         public function delete($id) {
@@ -198,6 +162,7 @@
             $this->session->set_flashdata("success", "Record deleted");
             return redirect(base_url() . "loading");
         }
+        
 
         public function restore($id) {
             if(!$this->session->user) {
@@ -208,5 +173,40 @@
 
             $this->session->set_flashdata("success", "Record restored");;
             return redirect(base_url() . "loading");
+        }
+
+
+        protected function upload_file($path, $file, $new_file_name){
+            $config['upload_path']          = $path;
+            $config['allowed_types']        = 'jpg|jpeg|png|pdf';
+            $config['file_name']            = $new_file_name; 
+    
+            $this->load->library('upload');
+            $this->upload->initialize($config);
+    
+            if ($this->upload->do_upload($file))
+            {
+                return array(
+                    'status' => true,
+                    'upload_data' => $this->upload->data()
+                );                
+            }
+            else
+            {
+                return array(
+                    'status' => false,
+                    'error' => $this->upload->display_errors()
+                );    
+            }
+        }
+
+        protected function delete_file($file){
+            if (file_exists($file)) {
+                unlink($file);
+                return true;
+            } 
+            else {
+                return false;
+            }
         }
     }
